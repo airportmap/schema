@@ -11,7 +11,7 @@
 
 CREATE TABLE user (
 
-    -- Primary key (autoincrementing user ID)
+    -- Auto incrementing user ID
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Unique, case-sensitive username and email (stored in binary)

@@ -40,7 +40,7 @@ CREATE TABLE block (
     KEY block_target ( _type, _target( 32 ) ),
     KEY block_expires ( expires ),
 
-    -- Enforce referential integrity for actor IDs (unless set to -1)
-    FOREIGN KEY ( actor ) REFERENCES user( _id )
+    -- Foreign key constraints
+    FOREIGN KEY ( actor ) REFERENCES user ( _id )
 
 );
