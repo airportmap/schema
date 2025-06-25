@@ -1,10 +1,32 @@
 CREATE TABLE user (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    _id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
     username VARCHAR( 32 ) NOT NULL UNIQUE,
     email VARCHAR( 255 ) NOT NULL UNIQUE,
-    passwd VARCHAR( 255 ) NOT NULL,
-    registred DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    passwd_hash VARCHAR( 255 ) NOT NULL,
+    token VARCHAR( 255 ) NULL,
+
+    _verify DATETIME NULL,
     _role ENUM( 'user', 'moderator', 'admin', 'bot' ) NOT NULL DEFAULT 'user',
     _status ENUM( 'pending', 'active', 'banned', 'suspended', 'deleted' ) NOT NULL DEFAULT 'pending',
-    last_login DATETIME NULL
+
+    registered DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    activated DATETIME NULL,
+
+    last_login DATETIME NULL,
+    failed_attempts INT UNSIGNED NOT NULL DEFAULT 0,
+    last_failed DATETIME NULL,
+
+    twofa_secret VARCHAR( 255 ) NULL,
+    twofa_created DATETIME NULL,
+
+    edit_count INT UNSIGNED NOT NULL DEFAULT 0,
+    approved_edits INT UNSIGNED NOT NULL DEFAULT 0,
+    rejected_edits INT UNSIGNED NOT NULL DEFAULT 0,
+    last_edit DATETIME NULL,
+
+    KEY user_role ( _role ),
+    KEY account_status ( _status )
+
 );
