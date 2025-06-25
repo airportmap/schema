@@ -26,7 +26,7 @@ CREATE TABLE airport (
     _type ENUM( 'large', 'medium', 'small', 'heliport', 'altiport', 'seaport', 'balloonport' ) NOT NULL,
 
     -- Operational status (open or closed)
-    _closed BOOLEAN NOT NULL DEFAULT 'false',
+    _closed BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- Airport label in default language and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
