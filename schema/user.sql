@@ -30,7 +30,7 @@ CREATE TABLE user (
     _role ENUM( 'user', 'moderator', 'admin', 'bot' ) NOT NULL DEFAULT 'user',
 
     -- Account lifecycle status
-    _status ENUM( 'pending', 'active', 'banned', 'suspended', 'deleted' ) NOT NULL DEFAULT 'pending',
+    _status ENUM( 'pending', 'active', 'blocked', 'closed' ) NOT NULL DEFAULT 'pending',
 
     -- Internal verification (e.g. for trusted editors or staff)
     _verified DATETIME NULL,
