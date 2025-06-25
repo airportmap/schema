@@ -32,10 +32,10 @@ CREATE TABLE airport (
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
     names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
-    -- Geographical position
-    lat FLOAT NOT NULL,                       -- Geographical latitude
-    lon FLOAT NOT NULL,                       -- Geographical longitude
-    alt FLOAT NOT NULL,                       -- Altitute in meters above sea level
+    -- Geographical position (WGS84)
+    lat DOUBLE NOT NULL,                      -- Geographical latitude
+    lon DOUBLE NOT NULL,                      -- Geographical longitude
+    alt DOUBLE NOT NULL,                      -- Altitute in meters above sea level
 
     -- Timezone reference IDs (foreign keys)
     tz INT( 10 ) UNSIGNED NOT NULL,           -- Standard timezone
