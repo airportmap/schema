@@ -6,10 +6,10 @@
 
 CREATE TABLE tz (
 
-    -- Internal ID (referenced by airport)
+    -- Internal ID
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    -- Common code / abbreviation (e.g. CET, PST)
+    -- Common code / abbreviation (e.g. "CET", "PST")
     code VARBINARY( 8 ) NOT NULL UNIQUE,
 
     -- Canonical timezone label and optional multilingual names
