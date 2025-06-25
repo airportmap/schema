@@ -59,7 +59,7 @@ CREATE TABLE user (
     _options JSON NULL,
 
     -- Indexes for administrative filtering
-    KEY user_role (_role),
-    KEY account_status (_status)
+    KEY user_role ( _role ),
+    KEY account_status ( _status )
 
 );
