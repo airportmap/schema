@@ -1,5 +1,5 @@
 -- ========================================================================
--- Table: user
+-- TABLE user
 -- ------------------------------------------------------------------------
 -- Defines all registered users of the Airportmap platform, including
 -- their authentication data, role assignments, 2FA support, activity
@@ -52,7 +52,7 @@ CREATE TABLE user (
     last_edit DATETIME NULL,
 
     -- Two-factor authentication (TOTP support)
-    _2fa_secret VARBINARY( 255 ) NULL,
+    _2fa_secret TINYBLOB NULL,
     _2fa_created DATETIME NULL,
 
     -- Optional user-defined or system-assigned JSON options
