@@ -7,7 +7,7 @@ CREATE TABLE user (
     passwd_hash VARCHAR( 255 ) NOT NULL,
     token VARCHAR( 255 ) NULL,
 
-    _verify DATETIME NULL,
+    _verified DATETIME NULL,
     _role ENUM( 'user', 'moderator', 'admin', 'bot' ) NOT NULL DEFAULT 'user',
     _status ENUM( 'pending', 'active', 'banned', 'suspended', 'deleted' ) NOT NULL DEFAULT 'pending',
 
@@ -18,8 +18,8 @@ CREATE TABLE user (
     failed_attempts INT UNSIGNED NOT NULL DEFAULT 0,
     last_failed DATETIME NULL,
 
-    twofa_secret VARCHAR( 255 ) NULL,
-    twofa_created DATETIME NULL,
+    _2fa_secret VARCHAR( 255 ) NULL,
+    _2fa_created DATETIME NULL,
 
     edit_count INT UNSIGNED NOT NULL DEFAULT 0,
     approved_edits INT UNSIGNED NOT NULL DEFAULT 0,
