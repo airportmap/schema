@@ -68,6 +68,6 @@ CREATE TABLE airport (
     FOREIGN KEY ( dtz ) REFERENCES tz ( _id ),
     FOREIGN KEY ( continent ) REFERENCES region ( _id ),
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
-    FOREIGN KEY ( region ) REFERENCES region ( _id ),
+    FOREIGN KEY ( region ) REFERENCES region ( _id )
 
 );
