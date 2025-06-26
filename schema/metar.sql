@@ -37,9 +37,9 @@ CREATE TABLE metar (
     altim_sea DOUBLE NULL,                    -- Sea-level pressure (optional)
 
     -- Wind data
-    wind_dir SMALLINT NULL,                   -- Direction in degrees (true)
-    wind_speed SMALLINT NULL,                 -- Sustained speed (knots)
-    wind_gust SMALLINT NULL,                  -- Gust speed (knots, optional)
+    wind_dir SMALLINT UNSIGNED NULL,          -- Direction in degrees (true)
+    wind_speed SMALLINT UNSIGNED NULL,        -- Sustained speed (knots)
+    wind_gust SMALLINT UNSIGNED NULL,         -- Gust speed (knots, optional)
 
     -- Precipitation data (if known)
     precip DOUBLE NOT NULL DEFAULT 0,         -- Rainfall amount (mm)
@@ -47,7 +47,7 @@ CREATE TABLE metar (
 
     -- Visibility (in statute miles or meters)
     vis_hori DOUBLE NULL,                     -- Horizontal visibility
-    vis_vert SMALLINT NULL,                   -- Vertical visibility (ceiling, ft AGL)
+    vis_vert SMALLINT UNSIGNED NULL,          -- Vertical visibility (ceiling, ft AGL)
 
     -- Cloud layers
     clouds JSON NULL,
@@ -62,5 +62,13 @@ CREATE TABLE metar (
 
     -- Foreign key constraints
     FOREIGN KEY ( airport ) REFERENCES airport ( _id )
+
+    -- Integrity checks
+    CHECK ( altim IS NULL OR altim >= 0 ),
+    CHECK ( altim_sea IS NULL OR altim_sea >= 0 ),
+    CHECK ( wind_dir IS NULL OR wind_dir BETWEEN 0 AND 360 ),
+    CHECK ( wind_speed IS NULL OR wind_speed >= 0 ),
+    CHECK ( wind_gust IS NULL OR wind_gust >= 0 ),
+    CHECK ( vis_hori IS NULL OR vis_hori >= 0 )
 
 );
