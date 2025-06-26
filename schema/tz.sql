@@ -9,8 +9,8 @@ CREATE TABLE tz (
     -- Internal ID
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    -- Common code / abbreviation (e.g. "CET", "PST")
-    code VARBINARY( 8 ) NOT NULL UNIQUE,
+    -- Ident code / time zone abbreviation (e.g. "CET", "PST")
+    ident VARBINARY( 8 ) NOT NULL UNIQUE,
 
     -- Canonical timezone label and optional multilingual names
     label VARBINARY( 64 ) NOT NULL,

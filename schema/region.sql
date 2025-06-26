@@ -15,7 +15,7 @@ CREATE TABLE region (
     _type ENUM( 'continent', 'country', 'region' ) NOT NULL,
 
     -- Common ISO code (e.g. "US", "EU", "DE", "US-NY")
-    code VARBINARY( 16 ) NOT NULL UNIQUE,
+    ident VARBINARY( 16 ) NOT NULL UNIQUE,
 
     -- Canonical region label and optional multilingual names
     label VARBINARY( 64 ) NOT NULL,
