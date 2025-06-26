@@ -27,14 +27,14 @@ CREATE TABLE image (
     -- Thumbnail meta (e.g. dimensions and size)
     thumb_meta JSON NULL,
 
-    -- Caption or image title
-    caption TINYBLOB NULL,
-
     -- License type (e.g. "CC-BY-SA-4.0")
-    license TINYBLOB NOT NULL,
+    license VARBINARY( 64 ) NOT NULL,
 
     -- Author / attribution (if required by license)
     credit BLOB NULL,
+
+    -- Caption or image title
+    caption TINYBLOB NULL,
 
     -- User or system reference (nullable)
     user INT( 10 ) UNSIGNED NULL,
