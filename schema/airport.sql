@@ -12,14 +12,14 @@
 CREATE TABLE airport (
 
     -- Internal database ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
 
     -- Common airport identifier codes
-    ICAO VARBINARY( 4 ) NOT NULL UNIQUE,      -- e.g. "KLAX"
-    IATA VARBINARY( 3 ) NULL UNIQUE,          -- e.g. "LAX"
-    GPS VARBINARY( 4 ) NULL UNIQUE,           -- GPS code, often same as ICAO
-    FAA VARBINARY( 5 ) NULL UNIQUE,           -- FAA location code (mainly US)
-    WMO VARBINARY( 5 ) NULL UNIQUE,           -- WMO weather station ID
+    ICAO VARBINARY( 4 ) NOT NULL,             -- e.g. "KLAX"
+    IATA VARBINARY( 3 ) NULL,                 -- e.g. "LAX"
+    GPS VARBINARY( 4 ) NULL,                  -- GPS code, often same as ICAO
+    FAA VARBINARY( 5 ) NULL,                  -- FAA location code (mainly US)
+    WMO VARBINARY( 5 ) NULL,                  -- WMO weather station ID
 
     -- Classification: operational usage and airport type
     _rest ENUM( 'civil', 'restricted', 'military', 'joint_use' ) NOT NULL,
@@ -36,8 +36,7 @@ CREATE TABLE airport (
     names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
-    lat DOUBLE NOT NULL,                      -- Geographical latitude
-    lon DOUBLE NOT NULL,                      -- Geographical longitude
+    coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
     alt DOUBLE NOT NULL,                      -- Altitute in meters above sea level
 
     -- Timezone reference IDs (foreign keys)
@@ -55,11 +54,15 @@ CREATE TABLE airport (
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort DOUBLE NOT NULL,
 
-    -- Indexes for common filtering operations
+    -- Indexes for searching / filtering operations
+    PRIMARY KEY ( _id ),
+    UNIQUE KEY airport_ident ( ICAO ),
+    KEY airport_IATA ( IATA ),
     KEY airport_rest ( _rest ),
     KEY airport_type ( _type ),
     KEY airport_status ( _closed ),
     KEY airport_service ( _service ),
+    SPATIAL KEY airport_coord ( coord ),
     KEY airport_tz ( tz ),
     KEY airport_continent ( continent ),
     KEY airport_country ( country ),
@@ -69,6 +72,12 @@ CREATE TABLE airport (
     FOREIGN KEY ( dtz ) REFERENCES tz ( _id ),
     FOREIGN KEY ( continent ) REFERENCES region ( _id ),
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
-    FOREIGN KEY ( region ) REFERENCES region ( _id )
+    FOREIGN KEY ( region ) REFERENCES region ( _id ),
+
+    -- Check for geografical boundaries
+    CHECK (
+      ST_Y( coord ) BETWEEN  -90 AND  90 AND
+      ST_X( coord ) BETWEEN -180 AND 180
+    )
 
 );

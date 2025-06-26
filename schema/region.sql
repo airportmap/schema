@@ -24,7 +24,7 @@ CREATE TABLE region (
     -- Optional parent (e.g. continent or country)
     parent INT( 10 ) UNSIGNED NULL,
 
-    -- Geographical boundaries
+    -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Indexes for searching / filtering operations

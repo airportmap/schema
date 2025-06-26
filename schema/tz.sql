@@ -20,7 +20,7 @@ CREATE TABLE tz (
     -- UTC offset in minutes (e.g. 60 for +01:00, -480 for -08:00)
     offset SMALLINT NOT NULL,
 
-    -- Geographical boundaries
+    -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Indexes for searching / filtering operations
