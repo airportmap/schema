@@ -13,7 +13,7 @@ CREATE TABLE revision (
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- User submitting the edit
-    user INT( 10 ) UNSIGNED NOT NULL,
+    user   INT( 10 ) UNSIGNED NOT NULL,
     is_bot BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- User who approved / rejected the edit
@@ -37,14 +37,15 @@ CREATE TABLE revision (
     has_conflict BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- When the edit was made and reviewed
-    edited_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    edited_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     reviewed_at DATETIME NULL,
 
     -- Full JSON diff or patched data
     edit JSON NOT NULL,
 
-    -- Optional reviewer comment
-    comment TINYBLOB NULL,
+    -- Optional edit & reviewer comments
+    edit_comment   TINYBLOB NULL,
+    review_comment TINYBLOB NULL,
 
     -- Indexes
     KEY rev_user ( user ),
