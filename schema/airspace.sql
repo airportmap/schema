@@ -50,7 +50,7 @@ CREATE TABLE airspace (
     -- Structured data
     _data JSON DEFAULT NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     KEY airspace_ident ( ident ),
     KEY airspace_type ( _type ),

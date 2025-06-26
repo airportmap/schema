@@ -27,7 +27,7 @@ CREATE TABLE region (
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     UNIQUE KEY region_ident ( ident ),
     SPATIAL KEY region_poly ( poly ),

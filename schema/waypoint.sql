@@ -21,7 +21,7 @@ CREATE TABLE waypoint (
     code VARBINARY( 8 ) NULL,
     prefix VARBINARY( 2 ) NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     KEY waypoint_ident ( ident ),
     SPATIAL KEY waypoint_coord ( coord ),

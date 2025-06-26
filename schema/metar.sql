@@ -56,7 +56,7 @@ CREATE TABLE metar (
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( station ),
     KEY metar_airport ( airport ),
     KEY metar_cat ( cat ),

@@ -23,7 +23,7 @@ CREATE TABLE tz (
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     UNIQUE KEY region_ident ( ident ),
     KEY tz_code ( code ),

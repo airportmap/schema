@@ -36,7 +36,7 @@ CREATE TABLE block (
     -- Optional flags or structured data
     _options JSON DEFAULT NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     KEY block_target ( _type, _target( 32 ) ),
     KEY block_expires ( expires ),

@@ -52,7 +52,7 @@ CREATE TABLE sigmet (
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     KEY sigmet_fir ( fir ),
     KEY sigmet_airport ( airport ),

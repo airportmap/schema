@@ -58,7 +58,7 @@ CREATE TABLE user (
     -- Optional user-defined or system-assigned JSON options
     _options JSON DEFAULT NULL,
 
-    -- Indexes for administrative filtering
+    -- Indexes
     PRIMARY KEY ( _id ),
     UNIQUE KEY user_uname ( username ),
     UNIQUE KEY user_email ( email ),

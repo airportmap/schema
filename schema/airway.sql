@@ -34,7 +34,7 @@ CREATE TABLE airway (
     -- Optional structured metadata (source, usage, conditions, etc.)
     _data JSON DEFAULT NULL,
 
-    -- Indexes for searching / filtering operations
+    -- Indexes
     PRIMARY KEY ( _id ),
     KEY airway_ident ( ident ),
     KEY airway_class ( _class ),
