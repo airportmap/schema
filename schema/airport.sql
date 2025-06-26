@@ -18,8 +18,8 @@ CREATE TABLE airport (
     ICAO VARBINARY( 4 ) NOT NULL,             -- e.g. "KLAX"
     IATA VARBINARY( 3 ) NULL,                 -- e.g. "LAX"
     GPS  VARBINARY( 4 ) NULL,                 -- GPS code, often same as ICAO
-    FAA  VARBINARY( 5 ) NULL,                 -- FAA location code (mainly US)
     WMO  VARBINARY( 5 ) NULL,                 -- WMO weather station ID
+    LOC  VARBINARY( 16 ) NULL,                -- Local identifier
 
     -- Classification: operational usage and airport type
     _rest ENUM ( 'civil', 'restricted', 'military', 'mixed' ) NOT NULL,
