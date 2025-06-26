@@ -15,8 +15,8 @@ CREATE TABLE user (
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Unique, case-sensitive username and email (stored in binary)
-    username VARBINARY( 32 ) NOT NULL UNIQUE,
-    email VARBINARY( 255 ) NOT NULL UNIQUE,
+    username VARBINARY( 32 ) NOT NULL,
+    email VARBINARY( 255 ) NOT NULL,
 
     -- Hashed login credentials
     passwd_hash TINYBLOB NOT NULL,           -- current password hash (e.g. bcrypt or Argon2)
@@ -59,6 +59,9 @@ CREATE TABLE user (
     _options JSON NULL,
 
     -- Indexes for administrative filtering
+    PRIMARY KEY ( _id ),
+    UNIQUE KEY user_uname ( username ),
+    UNIQUE KEY user_email ( email ),
     KEY user_role ( _role ),
     KEY account_status ( _status )
 

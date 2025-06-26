@@ -12,13 +12,13 @@
 CREATE TABLE block (
 
     -- Internal ID for each block entry
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
 
     -- Type of the target: 'ip', 'user', 'email', 'ua' (user agent)
     _type ENUM( 'ip', 'user', 'email', 'ua' ) NOT NULL,
 
     -- What is being blocked (stored as raw binary value, e.g. IP, user ID, email hash)
-    _target VARBINARY( 32 ) NOT NULL,
+    _target VARBINARY( 255 ) NOT NULL,
 
     -- ID of the user who initiated the block (admin, moderator),
     -- or -1 for automated/system-generated blocks
@@ -36,7 +36,8 @@ CREATE TABLE block (
     -- Optional flags or structured data
     _options JSON NULL,
 
-    -- Index for fast lookups (e.g. during login or edit actions)
+    -- Indexes for searching / filtering operations
+    PRIMARY KEY ( _id ),
     KEY block_target ( _type, _target( 32 ) ),
     KEY block_expires ( expires ),
 
