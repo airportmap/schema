@@ -22,8 +22,8 @@ CREATE TABLE airport (
     WMO  VARBINARY( 5 ) NULL,                 -- WMO weather station ID
 
     -- Classification: operational usage and airport type
-    _rest ENUM( 'civil', 'restricted', 'military', 'mixed' ) NOT NULL,
-    _type ENUM( 'large', 'medium', 'small', 'heliport', 'altiport', 'seaport', 'balloonport' ) NOT NULL,
+    _rest ENUM ( 'civil', 'restricted', 'military', 'mixed' ) NOT NULL,
+    _type ENUM ( 'large', 'medium', 'small', 'heliport', 'altiport', 'seaport', 'balloonport' ) NOT NULL,
 
     -- Operational status (open or closed)
     _closed BOOLEAN NOT NULL DEFAULT FALSE,
@@ -36,8 +36,8 @@ CREATE TABLE airport (
     names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
-    coord  POINT SRID 4326 NOT NULL,           -- Latitude / longitude
-    alt_ft SMALLINT NOT NULL,                 -- Altitute in feet above sea level
+    coord  POINT SRID 4326 NOT NULL,          -- Longitude / latitude
+    alt_ft INT UNSIGNED NOT NULL,             -- Altitute in feet above sea level
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
@@ -79,7 +79,11 @@ CREATE TABLE airport (
     FOREIGN KEY ( region ) REFERENCES region ( _id ),
 
     -- Integrity checks
-    CHECK ( ST_Y( coord ) BETWEEN -90 AND 90 AND ST_X( coord ) BETWEEN -180 AND 180 AND ),
-    CHECK ( ST_IsValid( poly ) )
+    CHECK (
+      ST_SRID( coord ) = 4326 AND
+      ST_Y( coord ) BETWEEN  -90 AND  90 AND
+      ST_X( coord ) BETWEEN -180 AND 180
+    ),
+    CHECK ( ST_SRID( poly ) = 4326 AND  ST_IsValid( poly ) )
 
 );

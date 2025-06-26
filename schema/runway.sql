@@ -9,51 +9,56 @@
 CREATE TABLE runway (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Referenced airport
     airport INT( 10 ) UNSIGNED NOT NULL,
 
     -- Runway identifiers (e.g. "09L/27R")
-    designator_from VARBINARY( 8 ) NOT NULL, -- lower-numbered end (e.g. "09L")
-    designator_to VARBINARY( 8 ) NOT NULL,   -- opposite end (e.g. "27R")
+    designator_from VARBINARY( 8 ) NOT NULL,  -- lower-numbered end (e.g. "09L")
+    designator_to   VARBINARY( 8 ) NOT NULL,  -- opposite end (e.g. "27R")
 
     -- Physical dimensions in meters
-    len INT UNSIGNED DEFAULT NULL,           -- runway length
-    width INT UNSIGNED DEFAULT NULL,         -- runway width
+    length_ft SMALLINT UNSIGNED NULL,
+    width_ft  SMALLINT UNSIGNED NULL,
 
     -- Surface and usage
-    surface VARBINARY( 32 ) NOT NULL,
-    active BOOLEAN NOT NULL DEFAULT TRUE,    -- active/inactive flag
-    lighted BOOLEAN NOT NULL DEFAULT FALSE,  -- lighting system present
+    surface ENUM (
+        'asp', 'bit', 'bri', 'cla', 'com', 'con', 'cop', 'cor',
+        'gre', 'grs', 'gvl', 'ice', 'lat', 'mac', 'pem', 'per',
+        'psp', 'rof', 'san', 'smt', 'sno', 'wat', 'unk'
+    ) NOT NULL DEFAULT 'unk',
+
+    -- Runway condition
+    active  BOOLEAN NOT NULL DEFAULT TRUE,    -- active/inactive flag
+    lighted BOOLEAN NOT NULL DEFAULT FALSE,   -- lighting system present
 
     -- Endpoints as geospatial points (WGS84)
-    coord_from POINT SRID 4326 NOT NULL,     -- threshold at designator_from
-    coord_to POINT SRID 4326 NOT NULL,       -- threshold at designator_to
+    coord_from POINT SRID 4326 NOT NULL,
+    coord_to   POINT SRID 4326 NOT NULL,
 
     -- Threshold elevations in feet MSL
-    alt_from INT UNSIGNED DEFAULT NULL,
-    alt_to INT UNSIGNED DEFAULT NULL,
+    alt_from_ft INT UNSIGNED NULL,
+    alt_to_ft   INT UNSIGNED NULL,
 
-    -- Displaced threshold distances in meters (if any)
-    dthr_from INT UNSIGNED DEFAULT NULL,
-    dthr_to INT UNSIGNED DEFAULT NULL,
+    -- Displaced threshold distances in feet (if any)
+    dthr_from_ft SMALLINT UNSIGNED NULL,
+    dthr_to_ft   SMALLINT UNSIGNED NULL,
 
-    -- Runway centerline bearing (degrees true) from each threshold
-    hdg_from DOUBLE DEFAULT NULL,
-    hdg_to DOUBLE DEFAULT NULL,
+    -- Runway centerline bearing (degrees true) from each side
+    hdg_from DOUBLE NULL,
+    hdg_to   DOUBLE NULL,
 
     -- Slope gradient (percent) if available
-    slope DOUBLE DEFAULT NULL,
+    slope DOUBLE NULL,
 
     -- Runway body polygon
-    poly POLYGON SRID 4326 DEFAULT NULL,
+    poly POLYGON SRID 4326 NOT NULL,
 
     -- Optional structured data (e.g. lighting type, arrestor gear, remarks)
     _data JSON NULL,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     UNIQUE KEY runway_ident ( airport, designator_from, designator_to ),
     KEY runway_airport ( airport ),
     KEY runway_surface ( surface ),
@@ -61,12 +66,22 @@ CREATE TABLE runway (
     SPATIAL KEY runway_poly ( poly ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( airport ) REFERENCES airport( _id ),
+    FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
-
-    CHECK ( len >= 0 AND width >= 0 AND alt_from >= 0 AND alt_to >= 0 ),
-    CHECK ( ST_SRID( coord_from ) = 4326 AND ST_SRID( coord_to ) = 4326 ),
-    CHECK ( hdg_from BETWEEN 0 AND 360 AND hdg_to BETWEEN 0 AND 360 )
+    CHECK (
+      ST_SRID( coord_from ) = 4326 AND
+      ST_Y( coord_from ) BETWEEN  -90 AND  90 AND
+      ST_X( coord_from ) BETWEEN -180 AND 180
+    ),
+    CHECK (
+      ST_SRID( coord_to ) = 4326 AND
+      ST_Y( coord_to ) BETWEEN  -90 AND  90 AND
+      ST_X( coord_to ) BETWEEN -180 AND 180
+    ),
+    CHECK ( hdg_from IS NULL OR hdg_from BETWEEN 0 AND 360 ),
+    CHECK ( hdg_to IS NULL OR hdg_to BETWEEN 0 AND 360 ),
+    CHECK ( slope IS NULL OR slope BETWEEN -1 AND 1 ),
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );
