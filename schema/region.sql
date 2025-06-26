@@ -9,17 +9,17 @@
 CREATE TABLE region (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Type of region: 'continent', 'country', 'region'
-    _type ENUM( 'continent', 'country', 'region' ) NOT NULL,
+    _type ENUM ( 'continent', 'country', 'region' ) NOT NULL,
 
     -- Common ISO code (e.g. "US", "EU", "DE", "US-NY")
-    ident VARBINARY( 16 ) NOT NULL,
+    ident VARBINARY( 8 ) NOT NULL,
 
     -- Canonical region label and optional multilingual names
-    label VARBINARY( 64 ) NOT NULL,
-    names JSON DEFAULT NULL,
+    label TINYBLOB NOT NULL,
+    names JSON NULL,
 
     -- Optional parent (e.g. continent or country)
     parent INT( 10 ) UNSIGNED NULL,
@@ -28,7 +28,6 @@ CREATE TABLE region (
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     UNIQUE KEY region_ident ( ident ),
     SPATIAL KEY region_poly ( poly ),
     KEY region_parent ( parent ),
@@ -37,6 +36,6 @@ CREATE TABLE region (
     FOREIGN KEY ( parent ) REFERENCES region ( _id ),
 
     -- Geographical consistency check
-    CHECK ( ST_IsValid( poly ) )
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );
