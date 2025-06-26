@@ -59,8 +59,9 @@ CREATE TABLE airport (
 
     -- Indexes for searching / filtering operations
     PRIMARY KEY ( _id ),
-    UNIQUE KEY airport_ident ( ICAO ),
+    UNIQUE KEY airport_ICAO ( ICAO ),
     KEY airport_IATA ( IATA ),
+    KEY airport_lookup ( ICAO, IATA, GPS ),
     KEY airport_rest ( _rest ),
     KEY airport_type ( _type ),
     KEY airport_status ( _closed ),
@@ -78,7 +79,7 @@ CREATE TABLE airport (
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
     FOREIGN KEY ( region ) REFERENCES region ( _id ),
 
-    -- Check for geografical boundaries
+    -- Check constraint to ensure valid latitude/longitude ranges
     CHECK (
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
