@@ -12,30 +12,29 @@
 CREATE TABLE airway (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Airway name/code (e.g. "UL601", "T50", "M851")
-    ident VARBINARY( 16 ) NOT NULL,
+    ident VARBINARY( 32 ) NOT NULL,
 
     -- Optional classification
-    _class ENUM( 'lower', 'upper', 'rnav', 'special' ) NOT NULL DEFAULT 'upper',
+    _class ENUM ( 'lower', 'upper', 'rnav', 'special' ) NOT NULL DEFAULT 'upper',
 
     -- Directionality (uni- or bidirectional)
-    _dir ENUM( 'both', 'fwd', 'rev' ) NOT NULL DEFAULT 'both',
+    _dir ENUM ( 'both', 'fwd', 'rev' ) NOT NULL DEFAULT 'both',
 
     -- Start and end waypoint references (foreign keys)
     wp_from INT( 10 ) UNSIGNED NOT NULL,
-    wp_to INT( 10 ) UNSIGNED NOT NULL,
+    wp_to   INT( 10 ) UNSIGNED NOT NULL,
 
     -- Optional minimum and maximum altitude (in feet)
-    level_min SMALLINT UNSIGNED NULL,
-    level_max SMALLINT UNSIGNED NULL,
+    level_min_ft INT UNSIGNED NULL,
+    level_max_ft INT UNSIGNED NULL,
 
     -- Optional structured metadata (source, usage, conditions, etc.)
-    _data JSON DEFAULT NULL,
+    _data JSON NULL,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     KEY airway_ident ( ident ),
     KEY airway_class ( _class ),
     KEY airway_dir ( _dir ),
@@ -43,7 +42,7 @@ CREATE TABLE airway (
     KEY airway_to ( wp_to ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( wp_from ) REFERENCES waypoint( _id ),
-    FOREIGN KEY ( wp_to ) REFERENCES waypoint( _id )
+    FOREIGN KEY ( wp_from ) REFERENCES waypoint ( _id ),
+    FOREIGN KEY ( wp_to ) REFERENCES waypoint ( _id )
 
 );
