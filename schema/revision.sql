@@ -14,6 +14,7 @@ CREATE TABLE revision (
 
     -- User submitting the edit
     user INT( 10 ) UNSIGNED NOT NULL,
+    is_bot BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- User who approved / rejected the edit
     reviewer INT( 10 ) UNSIGNED NULL,
@@ -28,7 +29,12 @@ CREATE TABLE revision (
     entity_id INT( 10 ) UNSIGNED NOT NULL,
 
     -- Workflow status
-    _status ENUM ( 'pending', 'approved', 'rejected' ) NOT NULL DEFAULT 'pending',
+    _status ENUM (
+      'pending', 'approved', 'rejected', 'rollback'
+    ) NOT NULL DEFAULT 'pending',
+
+    -- Conflict flag, e.g. if newer edit exists or data was changed meanwhile
+    has_conflict BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- When the edit was made and reviewed
     edited_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -42,14 +48,19 @@ CREATE TABLE revision (
 
     -- Indexes
     KEY rev_user ( user ),
+    KEY rev_botedit ( is_bot ),
     KEY rev_entity ( entity_type, entity_id ),
     KEY rev_status ( _status ),
+    KEY rev_conflict ( has_conflict ),
+    KEY rev_edited ( edited_at ),
+    KEY rev_reviewed ( reviewed_at ),
 
     -- Foreign key constraints
     FOREIGN KEY ( user ) REFERENCES user ( _id ),
     FOREIGN KEY ( reviewer ) REFERENCES user ( _id ),
 
     -- Integrity checks
+    CHECK ( reviewed_at >= edited_at ),
     CHECK ( change IS NULL OR JSON_VALID( change ) )
 
 );
