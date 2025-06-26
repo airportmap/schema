@@ -37,7 +37,7 @@ CREATE TABLE airport (
 
     -- Geographical position (WGS84)
     coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
-    alt DOUBLE NOT NULL,                      -- Altitute in meters above sea level
+    alt SMALLINT NOT NULL,                    -- Altitute in feet above sea level
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
