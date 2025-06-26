@@ -19,11 +19,19 @@ CREATE TABLE airspace (
     label VARBINARY( 255 ) NOT NULL,
     names JSON NULL,
 
-    -- Type of airspace (FIR, TMA, CTR, TSA, TRA, P, R, D, ATZ, AWY ...)
+    -- Type of airspace (FIR, UIR, TMA, CTR, ...)
     _type ENUM(
-        'fir', 'uir', 'tma', 'ctr', 'atz', 'awa', 'awy',
-        'danger', 'prohibited', 'restricted', 'military', 'special',
-        'other'
+        'fir',         -- Flight Information Region
+        'uir',         -- Upper Information Region
+        'tma',         -- Terminal Control Area
+        'ctr',         -- Control Zone
+        'atz',         -- Aerodrome Traffic Zone
+        'warn',        -- Danger Area
+        'rest',        -- Restricted Area
+        'prohib',      -- Prohibited Area
+        'military',    -- Military Zone
+        'special',     -- Special Use Airspace (SUA)
+        'other'        -- Reserved / Unknown
     ) NOT NULL,
 
     -- Airspace class (A–G, or U for unknown/unclassified)
