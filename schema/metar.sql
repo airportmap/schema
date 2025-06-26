@@ -37,9 +37,9 @@ CREATE TABLE metar (
     altim_sea DOUBLE DEFAULT NULL,            -- Sea-level pressure (optional)
 
     -- Wind data
-    wind_dir INT DEFAULT NULL,                -- Direction in degrees (true)
-    wind_spd INT DEFAULT NULL,                -- Sustained speed (knots)
-    wind_gust INT DEFAULT NULL,               -- Gust speed (knots, optional)
+    wind_dir SMALLINT DEFAULT NULL,           -- Direction in degrees (true)
+    wind_spd SMALLINT DEFAULT NULL,           -- Sustained speed (knots)
+    wind_gust SMALLINT DEFAULT NULL,          -- Gust speed (knots, optional)
 
     -- Precipitation data (if known)
     precip DOUBLE NOT NULL DEFAULT 0,         -- Rainfall amount (mm)
@@ -47,7 +47,7 @@ CREATE TABLE metar (
 
     -- Visibility (in statute miles or meters)
     vis_hori DOUBLE DEFAULT NULL,             -- Horizontal visibility
-    vis_vert INT DEFAULT NULL,                -- Vertical visibility (ceiling, ft AGL)
+    vis_vert SMALLINT DEFAULT NULL,           -- Vertical visibility (ceiling, ft AGL)
 
     -- Cloud layers (up to 4)
     clouds JSON DEFAULT NULL,
