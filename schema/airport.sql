@@ -22,7 +22,7 @@ CREATE TABLE airport (
     WMO VARBINARY( 5 ) NULL UNIQUE,           -- WMO weather station ID
 
     -- Classification: operational usage and airport type
-    _restriction ENUM( 'civil', 'restricted', 'military', 'joint_use' ) NOT NULL,
+    _rest ENUM( 'civil', 'restricted', 'military', 'joint_use' ) NOT NULL,
     _type ENUM( 'large', 'medium', 'small', 'heliport', 'altiport', 'seaport', 'balloonport' ) NOT NULL,
 
     -- Operational status (open or closed)
@@ -46,17 +46,14 @@ CREATE TABLE airport (
     country INT( 10 ) UNSIGNED NOT NULL,
     region INT( 10 ) UNSIGNED NULL,
 
-    -- Local administrative city or municipality
-    municipality VARBINARY( 255 ) NULL,
-
-    -- Custom meta data (e.g. passenger volume, size, dates, etc.)
-    _options JSON NULL,
+    -- Structured data (e.g. municipality, operator, passenger volume, size, dates, etc.)
+    _data JSON NULL,
 
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort FLOAT NOT NULL,
 
     -- Indexes for common filtering operations
-    KEY airport_restriction ( _restriction ),
+    KEY airport_rest ( _rest ),
     KEY airport_type ( _type ),
     KEY airport_status ( _closed ),
     KEY airport_tz ( tz ),
