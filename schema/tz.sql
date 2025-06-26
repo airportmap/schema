@@ -28,6 +28,9 @@ CREATE TABLE tz (
     UNIQUE KEY region_ident ( ident ),
     KEY tz_code ( code ),
     KEY tz_offset ( offset ),
-    SPATIAL KEY region_poly ( poly )
+    SPATIAL KEY region_poly ( poly ),
+
+    -- Geographical consistency check
+    CHECK ( ST_IsValid( poly ) )
 
 );

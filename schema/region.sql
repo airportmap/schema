@@ -34,6 +34,9 @@ CREATE TABLE region (
     KEY region_parent ( parent ),
 
     -- Foreign key to parent region (if any)
-    FOREIGN KEY ( parent ) REFERENCES region ( _id )
+    FOREIGN KEY ( parent ) REFERENCES region ( _id ),
+
+    -- Geographical consistency check
+    CHECK ( ST_IsValid( poly ) )
 
 );

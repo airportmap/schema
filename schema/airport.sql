@@ -22,7 +22,7 @@ CREATE TABLE airport (
     WMO VARBINARY( 5 ) NULL,                  -- WMO weather station ID
 
     -- Classification: operational usage and airport type
-    _rest ENUM( 'civil', 'restricted', 'military', 'joint_use' ) NOT NULL,
+    _rest ENUM( 'civil', 'restricted', 'military', 'mixed' ) NOT NULL,
     _type ENUM( 'large', 'medium', 'small', 'heliport', 'altiport', 'seaport', 'balloonport' ) NOT NULL,
 
     -- Operational status (open or closed)
@@ -79,10 +79,11 @@ CREATE TABLE airport (
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
     FOREIGN KEY ( region ) REFERENCES region ( _id ),
 
-    -- Check constraint to ensure valid latitude/longitude ranges
+    -- Geographical consistency check
     CHECK (
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
-      ST_X( coord ) BETWEEN -180 AND 180
+      ST_X( coord ) BETWEEN -180 AND 180 AND
+      ST_IsValid( poly )
     )
 
 );
