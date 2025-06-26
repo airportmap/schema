@@ -12,14 +12,14 @@
 CREATE TABLE airport (
 
     -- Internal database ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Common airport identifier codes
     ICAO VARBINARY( 4 ) NOT NULL,             -- e.g. "KLAX"
     IATA VARBINARY( 3 ) NULL,                 -- e.g. "LAX"
-    GPS VARBINARY( 4 ) NULL,                  -- GPS code, often same as ICAO
-    FAA VARBINARY( 5 ) NULL,                  -- FAA location code (mainly US)
-    WMO VARBINARY( 5 ) NULL,                  -- WMO weather station ID
+    GPS  VARBINARY( 4 ) NULL,                 -- GPS code, often same as ICAO
+    FAA  VARBINARY( 5 ) NULL,                 -- FAA location code (mainly US)
+    WMO  VARBINARY( 5 ) NULL,                 -- WMO weather station ID
 
     -- Classification: operational usage and airport type
     _rest ENUM( 'civil', 'restricted', 'military', 'mixed' ) NOT NULL,
@@ -33,32 +33,31 @@ CREATE TABLE airport (
 
     -- Airport label in default language and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
-    names JSON DEFAULT NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
+    names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
     coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
-    alt SMALLINT NOT NULL,                    -- Altitute in feet above sea level
+    alt_ft SMALLINT NOT NULL,                 -- Altitute in feet above sea level
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Timezone reference IDs (foreign keys)
-    tz INT( 10 ) UNSIGNED NOT NULL,           -- Standard timezone
-    dtz INT( 10 ) UNSIGNED NULL,              -- Daylight/alternate TZ (optional)
+    tz  INT( 10 ) UNSIGNED NOT NULL,          -- Standard timezone
+    dtz INT( 10 ) UNSIGNED NULL,              -- Daylight timezone (optional)
 
     -- Regional classification (continent, country, region/province)
     continent INT( 10 ) UNSIGNED NOT NULL,
-    country INT( 10 ) UNSIGNED NOT NULL,
-    region INT( 10 ) UNSIGNED NULL,
+    country   INT( 10 ) UNSIGNED NOT NULL,
+    region    INT( 10 ) UNSIGNED NULL,
 
     -- Structured data (e.g. municipality, operator, passenger volume, size, dates, etc.)
-    _data JSON DEFAULT NULL,
+    _data JSON NULL,
 
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort DOUBLE NOT NULL,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     UNIQUE KEY airport_ICAO ( ICAO ),
     KEY airport_IATA ( IATA ),
     KEY airport_lookup ( ICAO, IATA, GPS ),
@@ -79,11 +78,8 @@ CREATE TABLE airport (
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
     FOREIGN KEY ( region ) REFERENCES region ( _id ),
 
-    -- Geographical consistency check
-    CHECK (
-      ST_Y( coord ) BETWEEN  -90 AND  90 AND
-      ST_X( coord ) BETWEEN -180 AND 180 AND
-      ST_IsValid( poly )
-    )
+    -- Integrity checks
+    CHECK ( ST_Y( coord ) BETWEEN -90 AND 90 AND ST_X( coord ) BETWEEN -180 AND 180 AND ),
+    CHECK ( ST_IsValid( poly ) )
 
 );

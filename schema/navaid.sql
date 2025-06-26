@@ -24,7 +24,7 @@ CREATE TABLE navaid (
     freq_khz INT UNSIGNED NOT NULL,
 
     -- Location (WGS84)
-    coord POINT SRID 4326 NOT NULL,
+    coord  POINT SRID 4326 NOT NULL,
     alt_ft INT UNSIGNED NULL,
 
     -- Country and optional associated airport
@@ -33,17 +33,17 @@ CREATE TABLE navaid (
 
     -- DME specifics (if not standalone DME)
     dme_freq_khz INT UNSIGNED NULL,
-    dme_channel VARBINARY( 32 ) NULL,
-    dme_coord POINT SRID 4326 NULL,
-    dme_alt_ft INT UNSIGNED NULL,
+    dme_channel  VARBINARY( 32 ) NULL,
+    dme_coord    POINT SRID 4326 NULL,
+    dme_alt_ft   INT UNSIGNED NULL,
 
     -- Course/bearing offsets
     magnetic_deg DOUBLE NULL,                  -- magnetic orientation
-    slaved_deg DOUBLE NULL,                    -- slaved bearing (if applicable)
+    slaved_deg   DOUBLE NULL,                  -- slaved bearing (if applicable)
 
     -- Power and range metadata
     power_watts INT UNSIGNED NULL,
-    range_nm DOUBLE NULL,                      -- nominal service range in nautical miles
+    range_nm    DOUBLE NULL,                   -- nominal service range in nautical miles
 
     -- Optional extended data
     _data JSON NULL,
