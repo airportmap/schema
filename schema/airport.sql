@@ -39,6 +39,9 @@ CREATE TABLE airport (
     coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
     alt DOUBLE NOT NULL,                      -- Altitute in meters above sea level
 
+    -- Geographical boundaries (WGS84)
+    poly MULTIPOLYGON SRID 4326 NOT NULL,
+
     -- Timezone reference IDs (foreign keys)
     tz INT( 10 ) UNSIGNED NOT NULL,           -- Standard timezone
     dtz INT( 10 ) UNSIGNED NULL,              -- Daylight/alternate TZ (optional)
@@ -63,6 +66,7 @@ CREATE TABLE airport (
     KEY airport_status ( _closed ),
     KEY airport_service ( _service ),
     SPATIAL KEY airport_coord ( coord ),
+    SPATIAL KEY airport_poly ( poly ),
     KEY airport_tz ( tz ),
     KEY airport_continent ( continent ),
     KEY airport_country ( country ),
