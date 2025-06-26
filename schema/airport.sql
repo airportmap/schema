@@ -36,7 +36,7 @@ CREATE TABLE airport (
     names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
-    coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
+    coord  POINT SRID 4326 NOT NULL,           -- Latitude / longitude
     alt_ft SMALLINT NOT NULL,                 -- Altitute in feet above sea level
 
     -- Geographical boundaries (WGS84)
