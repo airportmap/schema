@@ -24,9 +24,6 @@ CREATE TABLE region (
     -- Optional parent (e.g. continent or country)
     parent INT( 10 ) UNSIGNED NULL,
 
-    -- Custom options and meta data
-    _options JSON NULL,
-
     -- Foreign key to parent region (if any)
     FOREIGN KEY ( parent ) REFERENCES region ( _id )
 

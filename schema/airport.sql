@@ -28,6 +28,9 @@ CREATE TABLE airport (
     -- Operational status (open or closed)
     _closed BOOLEAN NOT NULL DEFAULT FALSE,
 
+    -- Airline service available
+    _service BOOLEAN NOT NULL DEFAULT FALSE,
+
     -- Airport label in default language and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
     names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
@@ -50,12 +53,13 @@ CREATE TABLE airport (
     _data JSON NULL,
 
     -- Priority value for sorting (e.g. on map layers or in result lists)
-    _sort FLOAT NOT NULL,
+    _sort DOUBLE NOT NULL,
 
     -- Indexes for common filtering operations
     KEY airport_rest ( _rest ),
     KEY airport_type ( _type ),
     KEY airport_status ( _closed ),
+    KEY airport_service ( _service ),
     KEY airport_tz ( tz ),
     KEY airport_continent ( continent ),
     KEY airport_country ( country ),

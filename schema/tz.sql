@@ -19,9 +19,6 @@ CREATE TABLE tz (
     -- UTC offset in minutes (e.g. 60 for +01:00, -480 for -08:00)
     offset SMALLINT NOT NULL,
 
-    -- Custom options and meta data
-    _options JSON NULL,
-
     -- Index for common filtering operations
     KEY tz_code ( code )
 
