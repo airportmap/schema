@@ -19,7 +19,7 @@ CREATE TABLE region (
 
     -- Canonical region label and optional multilingual names
     label VARBINARY( 64 ) NOT NULL,
-    names JSON NULL,
+    names JSON DEFAULT NULL,
 
     -- Optional parent (e.g. continent or country)
     parent INT( 10 ) UNSIGNED NULL,

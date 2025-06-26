@@ -56,7 +56,7 @@ CREATE TABLE user (
     _2fa_created DATETIME NULL,
 
     -- Optional user-defined or system-assigned JSON options
-    _options JSON NULL,
+    _options JSON DEFAULT NULL,
 
     -- Indexes for administrative filtering
     PRIMARY KEY ( _id ),

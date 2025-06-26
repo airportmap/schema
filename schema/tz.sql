@@ -15,7 +15,7 @@ CREATE TABLE tz (
 
     -- Canonical timezone label and optional multilingual names
     label VARBINARY( 64 ) NOT NULL,
-    names JSON NULL,
+    names JSON DEFAULT NULL,
 
     -- UTC offset in minutes (e.g. 60 for +01:00, -480 for -08:00)
     offset SMALLINT NOT NULL,

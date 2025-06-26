@@ -32,7 +32,7 @@ CREATE TABLE airway (
     level_max SMALLINT UNSIGNED NULL,
 
     -- Optional structured metadata (source, usage, conditions, etc.)
-    _data JSON NULL,
+    _data JSON DEFAULT NULL,
 
     -- Indexes for searching / filtering operations
     PRIMARY KEY ( _id ),

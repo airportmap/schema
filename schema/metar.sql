@@ -11,7 +11,10 @@
 CREATE TABLE metar (
 
     -- ICAO station code (e.g. "EDDF", "KJFK")
-    station VARBINARY( 8 ) NOT NULL PRIMARY KEY,
+    station VARBINARY( 8 ) NOT NULL,
+
+    -- Optional related airport
+    airport INT( 10 ) DEFAULT NULL,
 
     -- Full raw METAR string
     _raw BLOB NOT NULL,
@@ -23,7 +26,7 @@ CREATE TABLE metar (
     wx VARBINARY( 32 ) DEFAULT NULL,
 
     -- Flight category (VFR, MVFR, IFR, LIFR) or unknown
-    _cat ENUM( 'vfr', 'mvfr', 'ifr', 'lifr', 'unk' ) NOT NULL DEFAULT 'unk',
+    cat ENUM( 'vfr', 'mvfr', 'ifr', 'lifr', 'unk' ) NOT NULL DEFAULT 'unk',
 
     -- Temperature and dew point (in °C)
     temp DOUBLE NOT NULL,                     -- Air temperature
@@ -47,10 +50,18 @@ CREATE TABLE metar (
     vis_vert INT DEFAULT NULL,                -- Vertical visibility (ceiling, ft AGL)
 
     -- Cloud layers (up to 4)
-    clouds JSON NULL,
+    clouds JSON DEFAULT NULL,
 
     -- Timestamp of last update (updated automatically)
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-        ON UPDATE CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    -- Indexes for searching / filtering operations
+    PRIMARY KEY ( station ),
+    KEY metar_airport ( airport ),
+    KEY metar_cat ( cat ),
+
+    -- Foreign key constraints
+    FOREIGN KEY ( airport ) REFERENCES airport ( _id )
 
 );

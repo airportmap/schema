@@ -17,7 +17,7 @@ CREATE TABLE airspace (
 
     -- Official or human-readable name and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,
-    names JSON NULL,
+    names JSON DEFAULT NULL,
 
     -- Type of airspace (FIR, UIR, TMA, CTR, ...)
     _type ENUM(
@@ -48,7 +48,7 @@ CREATE TABLE airspace (
     level_max SMALLINT UNSIGNED NULL,      -- e.g. 66000 ft (FL660), or NULL = unlimited
 
     -- Structured data
-    _data JSON NULL,
+    _data JSON DEFAULT NULL,
 
     -- Indexes for searching / filtering operations
     PRIMARY KEY ( _id ),

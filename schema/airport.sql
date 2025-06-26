@@ -33,7 +33,7 @@ CREATE TABLE airport (
 
     -- Airport label in default language and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
-    names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
+    names JSON DEFAULT NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
     coord POINT SRID 4326 NOT NULL,           -- Latitude / longitude
@@ -52,7 +52,7 @@ CREATE TABLE airport (
     region INT( 10 ) UNSIGNED NULL,
 
     -- Structured data (e.g. municipality, operator, passenger volume, size, dates, etc.)
-    _data JSON NULL,
+    _data JSON DEFAULT NULL,
 
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort DOUBLE NOT NULL,

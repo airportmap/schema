@@ -34,7 +34,7 @@ CREATE TABLE block (
     expires DATETIME NULL,
 
     -- Optional flags or structured data
-    _options JSON NULL,
+    _options JSON DEFAULT NULL,
 
     -- Indexes for searching / filtering operations
     PRIMARY KEY ( _id ),
