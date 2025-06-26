@@ -9,7 +9,7 @@
 CREATE TABLE waypoint (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Waypoint identifier (usually 3–7 characters)
     ident VARBINARY( 8 ) NOT NULL,
@@ -18,18 +18,18 @@ CREATE TABLE waypoint (
     coord POINT SRID 4326 NOT NULL,
 
     -- Optional codes / prefixes
-    code VARBINARY( 8 ) NULL,
+    code   VARBINARY( 8 ) NULL,
     prefix VARBINARY( 2 ) NULL,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     KEY waypoint_ident ( ident ),
     SPATIAL KEY waypoint_coord ( coord ),
     KEY waypoint_code ( code ),
     KEY waypoint_prefix ( prefix ),
 
-    -- Check constraint to ensure valid latitude/longitude ranges
+    -- Integrity checks
     CHECK (
+      ST_SRID( coord ) = 4326 AND
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
     )

@@ -17,7 +17,7 @@ CREATE TABLE airspace (
 
     -- Official or human-readable name and optional multilingual names
     label TINYBLOB NOT NULL,
-    names JSON NULL,
+    i18n  JSON NULL,
 
     -- Type of airspace (FIR, UIR, TMA, CTR, ...)
     _type ENUM (
@@ -56,7 +56,7 @@ CREATE TABLE airspace (
     KEY airspace_class ( _class ),
     SPATIAL KEY airspace_poly ( poly ),
 
-    -- Geographical consistency check
+    -- Integrity checks
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );

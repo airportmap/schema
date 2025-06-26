@@ -33,7 +33,7 @@ CREATE TABLE airport (
 
     -- Airport label in default language and optional multilingual names
     label VARBINARY( 255 ) NOT NULL,          -- Primary display name
-    names JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
+    i18n  JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
     coord  POINT SRID 4326 NOT NULL,          -- Longitude / latitude
@@ -84,6 +84,6 @@ CREATE TABLE airport (
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
     ),
-    CHECK ( ST_SRID( poly ) = 4326 AND  ST_IsValid( poly ) )
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );
