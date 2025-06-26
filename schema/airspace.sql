@@ -47,8 +47,8 @@ CREATE TABLE airspace (
     fl_min INT UNSIGNED NULL,
     fl_max INT UNSIGNED NULL,
 
-    -- Structured data
-    _data JSON NULL,
+    -- Structured meta data
+    _meta JSON NULL,
 
     -- Indexes
     KEY airspace_ident ( ident ),
@@ -57,6 +57,8 @@ CREATE TABLE airspace (
     SPATIAL KEY airspace_poly ( poly ),
 
     -- Integrity checks
-    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
+    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

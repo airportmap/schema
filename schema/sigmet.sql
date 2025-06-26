@@ -95,6 +95,9 @@ CREATE TABLE sigmet (
     SPATIAL KEY sigmet_poly ( poly ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( airport ) REFERENCES airport ( _id )
+    FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
+
+    -- Integrity checks
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );

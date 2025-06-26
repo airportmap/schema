@@ -75,8 +75,8 @@ CREATE TABLE runway (
     -- Runway body polygon
     poly POLYGON SRID 4326 NOT NULL,
 
-    -- Optional structured data (e.g. lighting type, arrestor gear, remarks)
-    _data JSON NULL,
+    -- Optional structured meta data (e.g. lighting type, remarks)
+    _meta JSON NULL,
 
     -- Indexes
     UNIQUE KEY runway_ident ( airport, designator_from, designator_to ),
@@ -102,6 +102,7 @@ CREATE TABLE runway (
     CHECK ( hdg_from IS NULL OR hdg_from BETWEEN 0 AND 360 ),
     CHECK ( hdg_to IS NULL OR hdg_to BETWEEN 0 AND 360 ),
     CHECK ( slope IS NULL OR slope BETWEEN -1 AND 1 ),
-    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

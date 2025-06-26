@@ -31,8 +31,8 @@ CREATE TABLE airway (
     fl_min INT UNSIGNED NULL,
     fl_max INT UNSIGNED NULL,
 
-    -- Optional structured metadata (source, usage, conditions, etc.)
-    _data JSON NULL,
+    -- Optional structured meta data (source, usage, conditions, etc.)
+    _meta JSON NULL,
 
     -- Indexes
     KEY airway_ident ( ident ),
@@ -43,6 +43,9 @@ CREATE TABLE airway (
 
     -- Foreign key constraints
     FOREIGN KEY ( wp_from ) REFERENCES waypoint ( _id ),
-    FOREIGN KEY ( wp_to ) REFERENCES waypoint ( _id )
+    FOREIGN KEY ( wp_to ) REFERENCES waypoint ( _id ),
+
+    -- Integrity checks
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

@@ -33,14 +33,17 @@ CREATE TABLE block (
     -- When the block will expire (NULL means permanent block)
     expires DATETIME NULL,
 
-    -- Optional flags or structured data
-    _options JSON NULL,
+    -- Optional flags or structured meta data
+    _meta JSON NULL,
 
     -- Indexes
     KEY block_target ( _type, _target( 32 ) ),
     KEY block_expires ( expires ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( actor ) REFERENCES user ( _id )
+    FOREIGN KEY ( actor ) REFERENCES user ( _id ),
+
+    -- Integrity checks
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

@@ -51,8 +51,8 @@ CREATE TABLE airport (
     country   INT( 10 ) UNSIGNED NOT NULL,
     region    INT( 10 ) UNSIGNED NULL,
 
-    -- Structured data (e.g. municipality, operator, passenger volume, size, dates, etc.)
-    _data JSON NULL,
+    -- Structured meta data (e.g. municipality, operator, passenger volume etc.)
+    _meta JSON NULL,
 
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort DOUBLE NOT NULL,
@@ -79,11 +79,13 @@ CREATE TABLE airport (
     FOREIGN KEY ( region ) REFERENCES region ( _id ),
 
     -- Integrity checks
+    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
     CHECK (
       ST_SRID( coord ) = 4326 AND
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
     ),
-    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

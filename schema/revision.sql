@@ -47,6 +47,9 @@ CREATE TABLE revision (
 
     -- Foreign key constraints
     FOREIGN KEY ( user ) REFERENCES user ( _id ),
-    FOREIGN KEY ( reviewer ) REFERENCES user ( _id )
+    FOREIGN KEY ( reviewer ) REFERENCES user ( _id ),
+
+    -- Integrity checks
+    CHECK ( change IS NULL OR JSON_VALID( change ) )
 
 );

@@ -60,14 +60,17 @@ CREATE TABLE frequency (
     -- Optional label (e.g. "Tower North", "Approach East")
     label TINYBLOB NULL,
 
-    -- Optional structured metadata (e.g. service hours, remarks)
-    _data JSON NULL,
+    -- Optional structured meta data (e.g. service hours, remarks)
+    _meta JSON NULL,
 
     -- Indexes
     KEY freq_airport ( airport ),
     KEY freq_type ( _type ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( airport ) REFERENCES airport ( _id )
+    FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
+
+    -- Integrity checks
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

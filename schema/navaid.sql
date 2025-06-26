@@ -45,8 +45,8 @@ CREATE TABLE navaid (
     power_watts INT UNSIGNED NULL,
     range_nm    DOUBLE NULL,                   -- nominal service range in nautical miles
 
-    -- Optional extended data
-    _data JSON NULL,
+    -- Optional structured meta data
+    _meta JSON NULL,
 
     -- Indexes
     KEY navaid_ident ( ident ),
@@ -72,6 +72,7 @@ CREATE TABLE navaid (
     ) ),
     CHECK ( magnetic_deg IS NULL OR magnetic_deg BETWEEN 0 AND 360 ),
     CHECK ( slaved_deg IS NULL OR slaved_deg BETWEEN 0 AND 360 ),
-    CHECK ( range_nm IS NULL OR range_nm >= 0 )
+    CHECK ( range_nm IS NULL OR range_nm >= 0 ),
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

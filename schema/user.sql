@@ -55,13 +55,16 @@ CREATE TABLE user (
     _2fa_secret  TINYBLOB NULL,
     _2fa_created DATETIME NULL,
 
-    -- Optional user-defined or system-assigned JSON options
-    _options JSON NULL,
+    -- Optional user-defined or system-assigned meta data
+    _meta JSON NULL,
 
     -- Indexes
     UNIQUE KEY user_uname ( username ),
     UNIQUE KEY user_email ( email ),
     KEY user_role ( _role ),
-    KEY account_status ( _status )
+    KEY account_status ( _status ),
+
+    -- Integrity checks
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

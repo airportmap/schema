@@ -36,6 +36,7 @@ CREATE TABLE tz (
     FOREIGN KEY ( parent ) REFERENCES tz ( _id ),
 
     -- Integrity checks
+    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );

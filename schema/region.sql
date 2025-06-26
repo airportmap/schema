@@ -35,7 +35,8 @@ CREATE TABLE region (
     -- Foreign key to parent region (if any)
     FOREIGN KEY ( parent ) REFERENCES region ( _id ),
 
-    -- Geographical consistency check
+    -- Integrity checks
+    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );

@@ -50,6 +50,10 @@ CREATE TABLE image (
 
     -- Foreign key constraints
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
-    FOREIGN KEY ( user ) REFERENCES user ( _id )
+    FOREIGN KEY ( user ) REFERENCES user ( _id ),
+
+    -- Integrity checks
+    CHECK ( image_meta IS NULL OR JSON_VALID( image_meta ) ),
+    CHECK ( thumb_meta IS NULL OR JSON_VALID( thumb_meta ) )
 
 );
