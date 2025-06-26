@@ -28,8 +28,8 @@ CREATE TABLE airway (
     wp_to   INT( 10 ) UNSIGNED NOT NULL,
 
     -- Optional minimum and maximum altitude (in feet)
-    level_min_ft INT UNSIGNED NULL,
-    level_max_ft INT UNSIGNED NULL,
+    fl_min INT UNSIGNED NULL,
+    fl_max INT UNSIGNED NULL,
 
     -- Optional structured metadata (source, usage, conditions, etc.)
     _data JSON NULL,

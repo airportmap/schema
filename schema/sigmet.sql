@@ -12,38 +12,49 @@
 CREATE TABLE sigmet (
 
     -- Internal unique identifier
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Raw report (original textual source)
     _raw BLOB NOT NULL,
 
     -- Related FIR (Flight Information Region) or Airport (optional)
-    fir VARBINARY( 32 ) DEFAULT NULL,
+    fir VARBINARY( 32 ) NULL,
 
     -- Optional related airport
-    airport INT( 10 ) DEFAULT NULL,
+    airport INT( 10 ) UNSIGNED NULL,
 
     -- Source identification
-    label TINYBLOB DEFAULT NULL,              -- meteorological office
-    series VARBINARY( 8 ) DEFAULT NULL,       -- SIGMET label in FIR
+    label  TINYBLOB NULL,                     -- meteorological office
+    series VARBINARY( 8 ) NULL,               -- SIGMET label in FIR
 
     -- Main hazard characteristics
-    hazard VARBINARY( 8 ) NOT NULL,           -- e.g. "TURB", "ICE", "TS", "ASH"
-    qualifier VARBINARY( 16 ) NULL,           -- e.g. "OBS", "FCST"
-    severity TINYINT UNSIGNED NULL,           -- Optional severity scale (if numeric)
+    hazard ENUM (
+      'cld', 'conv', 'ds', 'fc', 'gr', 'ice', 'ifr', 'mtw',
+      'ss', 'tc', 'tdo', 'ts', 'tsgr', 'turb', 'va', 'wtspt'
+    ) NULL,
+    qualifier ENUM (
+      'area', 'embd', 'frq', 'hvy', 'isol', 'obsc',
+      'ocnl', 'rdoact', 'sev', 'sql'
+    ) NULL,
+
+    -- Optional severity scale (if numeric)
+    severity TINYINT UNSIGNED NULL,
 
     -- Validity window
     valid_from DATETIME NOT NULL,             -- Start of SIGMET validity
     valid_to   DATETIME NOT NULL,             -- End of SIGMET validity
 
     -- Flight level range affected (in feet)
-    fl_min SMALLINT UNSIGNED DEFAULT NULL,
-    fl_max SMALLINT UNSIGNED DEFAULT NULL,
+    fl_min INT UNSIGNED NULL,
+    fl_max INT UNSIGNED NULL,
 
     -- Motion vector (optional)
-    dir VARBINARY( 4 ) DEFAULT NULL,          -- Cardinal (e.g. "E", "NE")
-    spd SMALLINT UNSIGNED DEFAULT NULL,       -- In knots
-    cng VARBINARY( 8 ) DEFAULT NULL,          -- e.g. "WKN", "NC", "INTSF"
+    direction ENUM (
+      'n', 'nne', 'ne', 'ene', 'e', 'ese', 'se', 'sse',
+      's', 'ssw', 'sw', 'wsw', 'w', 'wnw', 'nw', 'nnw'
+    ) NULL,
+    speed_kn SMALLINT UNSIGNED NULL,
+    change ENUM ( 'nc', 'intsf', 'wkn' ) NULL,
 
     -- Affected area polygon (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
@@ -53,7 +64,6 @@ CREATE TABLE sigmet (
         ON UPDATE CURRENT_TIMESTAMP,
 
     -- Indexes
-    PRIMARY KEY ( _id ),
     KEY sigmet_fir ( fir ),
     KEY sigmet_airport ( airport ),
     KEY sigmet_hazard ( hazard ),

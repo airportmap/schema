@@ -24,9 +24,9 @@ CREATE TABLE runway (
 
     -- Surface and usage
     surface ENUM (
-        'asp', 'bit', 'bri', 'cla', 'com', 'con', 'cop', 'cor',
-        'gre', 'grs', 'gvl', 'ice', 'lat', 'mac', 'pem', 'per',
-        'psp', 'rof', 'san', 'smt', 'sno', 'wat', 'unk'
+      'asp', 'bit', 'bri', 'cla', 'com', 'con', 'cop', 'cor',
+      'gre', 'grs', 'gvl', 'ice', 'lat', 'mac', 'pem', 'per',
+      'psp', 'rof', 'san', 'smt', 'sno', 'wat', 'unk'
     ) NOT NULL DEFAULT 'unk',
 
     -- Runway condition
