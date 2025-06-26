@@ -19,8 +19,8 @@ CREATE TABLE runway (
     designator_to   VARBINARY( 8 ) NOT NULL,  -- opposite end (e.g. "27R")
 
     -- Physical dimensions in meters
-    length_ft SMALLINT UNSIGNED NULL,
-    width_ft  SMALLINT UNSIGNED NULL,
+    len   SMALLINT UNSIGNED NULL,
+    width SMALLINT UNSIGNED NULL,
 
     -- Surface and usage
     surface ENUM (
@@ -38,12 +38,12 @@ CREATE TABLE runway (
     coord_to   POINT SRID 4326 NOT NULL,
 
     -- Threshold elevations in feet MSL
-    alt_from_ft INT UNSIGNED NULL,
-    alt_to_ft   INT UNSIGNED NULL,
+    alt_from INT UNSIGNED NULL,
+    alt_to   INT UNSIGNED NULL,
 
     -- Displaced threshold distances in feet (if any)
-    dthr_from_ft SMALLINT UNSIGNED NULL,
-    dthr_to_ft   SMALLINT UNSIGNED NULL,
+    dthr_from SMALLINT UNSIGNED NULL,
+    dthr_to   SMALLINT UNSIGNED NULL,
 
     -- Runway centerline bearing (degrees true) from each side
     hdg_from DOUBLE NULL,

@@ -11,10 +11,10 @@
 CREATE TABLE metar (
 
     -- ICAO station code (e.g. "EDDF", "KJFK")
-    station VARBINARY( 8 ) NOT NULL,
+    station VARBINARY( 8 ) NOT NULL PRIMARY KEY,
 
     -- Optional related airport
-    airport INT( 10 ) DEFAULT NULL,
+    airport INT( 10 ) UNSIGNED NULL,
 
     -- Full raw METAR string
     _raw BLOB NOT NULL,
@@ -26,38 +26,37 @@ CREATE TABLE metar (
     wx VARBINARY( 32 ) DEFAULT NULL,
 
     -- Flight category (VFR, MVFR, IFR, LIFR) or unknown
-    cat ENUM( 'vfr', 'mvfr', 'ifr', 'lifr', 'unk' ) NOT NULL DEFAULT 'unk',
+    cat ENUM ( 'vfr', 'mvfr', 'ifr', 'lifr', 'unk' ) NOT NULL DEFAULT 'unk',
 
     -- Temperature and dew point (in °C)
     temp DOUBLE NOT NULL,                     -- Air temperature
     dewp DOUBLE NOT NULL,                     -- Dew point temperature
 
-    -- Altimeter pressure (in hPa or inHg)
-    altim DOUBLE DEFAULT NULL,                -- Station pressure
-    altim_sea DOUBLE DEFAULT NULL,            -- Sea-level pressure (optional)
+    -- Altimeter pressure (in hPa)
+    altim DOUBLE NULL,                        -- Station pressure
+    altim_sea DOUBLE NULL,                    -- Sea-level pressure (optional)
 
     -- Wind data
-    wind_dir SMALLINT DEFAULT NULL,           -- Direction in degrees (true)
-    wind_spd SMALLINT DEFAULT NULL,           -- Sustained speed (knots)
-    wind_gust SMALLINT DEFAULT NULL,          -- Gust speed (knots, optional)
+    wind_dir SMALLINT NULL,                   -- Direction in degrees (true)
+    wind_speed SMALLINT NULL,                 -- Sustained speed (knots)
+    wind_gust SMALLINT NULL,                  -- Gust speed (knots, optional)
 
     -- Precipitation data (if known)
     precip DOUBLE NOT NULL DEFAULT 0,         -- Rainfall amount (mm)
     snow DOUBLE NOT NULL DEFAULT 0,           -- Snowfall amount (mm)
 
     -- Visibility (in statute miles or meters)
-    vis_hori DOUBLE DEFAULT NULL,             -- Horizontal visibility
-    vis_vert SMALLINT DEFAULT NULL,           -- Vertical visibility (ceiling, ft AGL)
+    vis_hori DOUBLE NULL,                     -- Horizontal visibility
+    vis_vert SMALLINT NULL,                   -- Vertical visibility (ceiling, ft AGL)
 
-    -- Cloud layers (up to 4)
-    clouds JSON DEFAULT NULL,
+    -- Cloud layers
+    clouds JSON NULL,
 
     -- Timestamp of last update (updated automatically)
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
     -- Indexes
-    PRIMARY KEY ( station ),
     KEY metar_airport ( airport ),
     KEY metar_cat ( cat ),
 

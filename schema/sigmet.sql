@@ -49,12 +49,12 @@ CREATE TABLE sigmet (
     fl_max INT UNSIGNED NULL,
 
     -- Motion vector (optional)
-    direction ENUM (
+    dir ENUM (
       'n', 'nne', 'ne', 'ene', 'e', 'ese', 'se', 'sse',
       's', 'ssw', 'sw', 'wsw', 'w', 'wnw', 'nw', 'nnw'
     ) NULL,
-    speed_kn SMALLINT UNSIGNED NULL,
-    change ENUM ( 'nc', 'intsf', 'wkn' ) NULL,
+    spd SMALLINT UNSIGNED NULL,
+    cng ENUM ( 'nc', 'intsf', 'wkn' ) NULL,
 
     -- Affected area polygon (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
