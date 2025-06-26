@@ -24,9 +24,29 @@ CREATE TABLE runway (
 
     -- Surface and usage
     surface ENUM (
-      'asp', 'bit', 'bri', 'cla', 'com', 'con', 'cop', 'cor',
-      'gre', 'grs', 'gvl', 'ice', 'lat', 'mac', 'pem', 'per',
-      'psp', 'rof', 'san', 'smt', 'sno', 'wat', 'unk'
+      'asp',  -- Asphalt
+      'bit',  -- Bituminous asphalt or tarmac
+      'bri',  -- Bricks (no longer in use, covered with asphalt or concrete now)
+      'cla',  -- Clay
+      'com',  -- Composite
+      'con',  -- Concrete
+      'cop',  -- Composite
+      'cor',  -- Coral (fine crushed coral reef structures)
+      'gre',  -- Graded or rolled earth, grass on graded earth
+      'grs',  -- Grass or earth not graded or rolled
+      'gvl',  -- Gravel
+      'ice',  -- Ice
+      'lat',  -- Laterite
+      'mac',  -- Macadam
+      'pem',  -- Partially concrete, asphalt or bitumen-bound macadam
+      'per',  -- Permanent surface, details unknown
+      'psp',  -- Marston Matting (derived from pierced/perforated steel planking)
+      'rof',  -- Rooftop (Heliport)
+      'san',  -- Sand
+      'smt',  -- Sommerfeld Tracking
+      'sno',  -- Snow
+      'unk',  -- Unknown surface
+      'wat'   -- Water
     ) NOT NULL DEFAULT 'unk',
 
     -- Runway condition

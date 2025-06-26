@@ -35,7 +35,7 @@ CREATE TABLE airspace (
     ) NOT NULL,
 
     -- Airspace class (A–G, or U for unknown/unclassified)
-    _class ENUM ( 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'U' ) NOT NULL DEFAULT 'U',
+    _class ENUM ( 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'u' ) NOT NULL DEFAULT 'u',
 
     -- Controlled usage or purpose
     _usage ENUM ( 'civil', 'military', 'mixed', 'special' ) NOT NULL DEFAULT 'civil',

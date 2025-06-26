@@ -29,12 +29,34 @@ CREATE TABLE sigmet (
 
     -- Main hazard characteristics
     hazard ENUM (
-      'cld', 'conv', 'ds', 'fc', 'gr', 'ice', 'ifr', 'mtw',
-      'ss', 'tc', 'tdo', 'ts', 'tsgr', 'turb', 'va', 'wtspt'
+      'cld',    -- Cloud
+      'conv',   -- Connvective
+      'ds',     -- Duststorm
+      'fc',     -- Funnel cloud
+      'gr',     -- Hail
+      'ice',    -- Ice
+      'ifr',    -- Mountain Obscuration
+      'mtw',    -- Mountain wave
+      'ss',     -- Sandstorm
+      'tc',     -- Tropical storm
+      'tdo',    -- Tornado
+      'ts',     -- Thunderstorm
+      'tsgr',   -- Thunderstorm with hail
+      'turb',   -- Turbulence
+      'va',     -- Vulcanic ash
+      'wtspt'   -- Waterspout
     ) NULL,
     qualifier ENUM (
-      'area', 'embd', 'frq', 'hvy', 'isol', 'obsc',
-      'ocnl', 'rdoact', 'sev', 'sql'
+      'area',   -- area-wide
+      'embd',   -- embedded
+      'frq',    -- frequent
+      'hvy',    -- heavy
+      'isol',   -- isolated
+      'obsc',   -- obscured
+      'ocnl',   -- occasional
+      'rdoact', -- radioactive
+      'sev',    -- severe
+      'sql'     -- squall line
     ) NULL,
 
     -- Optional severity scale (if numeric)
