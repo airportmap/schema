@@ -41,7 +41,7 @@ CREATE TABLE revision (
     reviewed_at DATETIME NULL,
 
     -- Full JSON diff or patched data
-    change JSON NOT NULL,
+    edit JSON NOT NULL,
 
     -- Optional reviewer comment
     comment TINYBLOB NULL,
@@ -61,6 +61,6 @@ CREATE TABLE revision (
 
     -- Integrity checks
     CHECK ( reviewed_at >= edited_at ),
-    CHECK ( change IS NULL OR JSON_VALID( change ) )
+    CHECK ( edit IS NULL OR JSON_VALID( edit ) )
 
 );

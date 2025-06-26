@@ -67,8 +67,6 @@ CREATE TABLE metar (
     CHECK ( altim IS NULL OR altim >= 0 ),
     CHECK ( altim_sea IS NULL OR altim_sea >= 0 ),
     CHECK ( wind_dir IS NULL OR wind_dir BETWEEN 0 AND 360 ),
-    CHECK ( wind_speed IS NULL OR wind_speed >= 0 ),
-    CHECK ( wind_gust IS NULL OR wind_gust >= 0 ),
     CHECK ( vis_hori IS NULL OR vis_hori >= 0 ),
     CHECK ( clouds IS NULL OR JSON_VALID( clouds ) )
 
