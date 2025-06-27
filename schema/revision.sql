@@ -26,12 +26,16 @@ CREATE TABLE revision (
     ) NOT NULL,
 
     -- Primary key of the affected entity row
-    entity_id INT( 10 ) UNSIGNED NOT NULL,
+    -- NULL if new entity
+    entity_id INT( 10 ) UNSIGNED NULL,
 
     -- Workflow status
     _status ENUM (
       'pending', 'approved', 'rejected', 'rollback'
     ) NOT NULL DEFAULT 'pending',
+
+    -- Will be set if the edit belongs to a new entity
+    is_new BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- Conflict flag, e.g. if newer edit exists or data was changed meanwhile
     has_conflict BOOLEAN NOT NULL DEFAULT FALSE,
@@ -46,6 +50,9 @@ CREATE TABLE revision (
     -- Optional edit & reviewer comments
     edit_comment   TINYBLOB NULL,
     review_comment TINYBLOB NULL,
+
+    -- Size of the edit in bytes
+    _size INT( 10 ) UNSIGNED NOT NULL,
 
     -- Indexes
     KEY rev_user ( user ),

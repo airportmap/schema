@@ -49,6 +49,7 @@ CREATE TABLE user (
     pending_edits  INT UNSIGNED NOT NULL DEFAULT 0,
     approved_edits INT UNSIGNED NOT NULL DEFAULT 0,
     rejected_edits INT UNSIGNED NOT NULL DEFAULT 0,
+    edit_size      INT UNSIGNED NOT NULL DEFAULT 0,
     last_edit      DATETIME NULL,
 
     -- Two-factor authentication (TOTP support)
