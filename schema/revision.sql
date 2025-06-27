@@ -50,7 +50,7 @@ CREATE TABLE revision (
     review_comment TINYBLOB NULL,
 
     -- Size of the edit in bytes
-    _size INT( 10 ) UNSIGNED NOT NULL,
+    _size INT UNSIGNED NOT NULL,
 
     -- Indexes
     KEY rev_user ( user ),
