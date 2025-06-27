@@ -57,6 +57,9 @@ CREATE TABLE airport (
     -- Priority value for sorting (e.g. on map layers or in result lists)
     _sort DOUBLE NOT NULL,
 
+    -- Data quality / completeness
+    _quality DOUBLE NOT NULL,
+
     -- Indexes
     UNIQUE KEY airport_ICAO ( ICAO ),
     KEY airport_IATA ( IATA ),
