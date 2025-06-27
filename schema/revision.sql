@@ -20,8 +20,8 @@ CREATE TABLE revision (
 
     -- Which table was edited (e.g. airport, runway, navaid, proc)
     entity_type ENUM (
-      'airport', 'airspace', 'airway', 'frequency', 'image',
-      'navaid', 'proc', 'runway', 'waypoint'
+      'airport', 'airspace', 'airway', 'feature', 'frequency', 'image',
+      'navaid', 'proc', 'region', 'runway', 'tz', 'waypoint'
     ) NOT NULL,
 
     -- Primary key of the affected entity row
