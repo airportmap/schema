@@ -38,6 +38,9 @@ CREATE TABLE mapdata (
     -- Geometrical shape (POINT, LINESTRING, POLYGON, etc.)
     geom GEOMETRY NOT NULL SRID 4326,
 
+    -- Structured meta data
+    _meta JSON NULL,
+
     -- Update timestamp
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
@@ -51,6 +54,7 @@ CREATE TABLE mapdata (
 
     -- Integrity checks
     CHECK ( _zmax IS NULL OR _zmax >= _zmin ),
-    CHECK ( ST_SRID( geom ) = 4326 )
+    CHECK ( ST_SRID( geom ) = 4326 ),
+    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );
