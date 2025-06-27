@@ -5,8 +5,8 @@
 -- codes, geographical coordinates, timezone information, and classification
 -- such as size, usage restrictions, and operational status.
 --
--- Supports multilingual labels, regional affiliation and sorting priority
--- for optimized map rendering and user interfaces.
+-- Supports multilingual labels, regional affiliation and optional meta
+-- data for structured payload.
 -- ========================================================================
 
 CREATE TABLE airport (
@@ -53,9 +53,6 @@ CREATE TABLE airport (
 
     -- Structured meta data (e.g. municipality, operator, passenger volume etc.)
     _meta JSON NULL,
-
-    -- Priority value for sorting (e.g. on map layers or in result lists)
-    _sort DOUBLE NOT NULL,
 
     -- Data quality / completeness
     _quality DOUBLE NOT NULL,
