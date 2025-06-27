@@ -13,8 +13,7 @@ CREATE TABLE revision (
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- User submitting the edit
-    user   INT( 10 ) UNSIGNED NOT NULL,
-    is_bot BOOLEAN NOT NULL DEFAULT FALSE,
+    user INT( 10 ) UNSIGNED NOT NULL,
 
     -- User who approved / rejected the edit
     reviewer INT( 10 ) UNSIGNED NULL,
@@ -34,11 +33,10 @@ CREATE TABLE revision (
       'pending', 'approved', 'rejected', 'rollback'
     ) NOT NULL DEFAULT 'pending',
 
-    -- Will be set if the edit belongs to a new entity
-    is_new BOOLEAN NOT NULL DEFAULT FALSE,
-
-    -- Conflict flag, e.g. if newer edit exists or data was changed meanwhile
-    has_conflict BOOLEAN NOT NULL DEFAULT FALSE,
+    -- Edit flags
+    _bot      BOOLEAN NOT NULL DEFAULT FALSE,  -- Bot edit
+    _conflict BOOLEAN NOT NULL DEFAULT FALSE,  -- Edit conflict
+    _new      BOOLEAN NOT NULL DEFAULT FALSE,  -- New entity
 
     -- When the edit was made and reviewed
     edited_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -56,10 +54,11 @@ CREATE TABLE revision (
 
     -- Indexes
     KEY rev_user ( user ),
-    KEY rev_botedit ( is_bot ),
     KEY rev_entity ( entity_type, entity_id ),
     KEY rev_status ( _status ),
-    KEY rev_conflict ( has_conflict ),
+    KEY rev_botedit ( _bot ),
+    KEY rev_conflict ( _conflict ),
+    KEY rev_newedit ( _new ),
     KEY rev_edited ( edited_at ),
     KEY rev_reviewed ( reviewed_at ),
 
