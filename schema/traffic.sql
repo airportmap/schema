@@ -69,7 +69,7 @@ CREATE TABLE traffic (
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
     ),
-    CHECK ( hdg IS NULL OR hdg BETWEEN 0 AND 360 ),
+    CHECK ( hdg IS NULL OR ( hdg BETWEEN 0 AND 360 ) ),
     CHECK ( spd IS NULL OR spd >= 0 )
 
 );

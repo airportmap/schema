@@ -99,9 +99,9 @@ CREATE TABLE runway (
       ST_Y( coord_to ) BETWEEN  -90 AND  90 AND
       ST_X( coord_to ) BETWEEN -180 AND 180
     ),
-    CHECK ( hdg_from IS NULL OR hdg_from BETWEEN 0 AND 360 ),
-    CHECK ( hdg_to IS NULL OR hdg_to BETWEEN 0 AND 360 ),
-    CHECK ( slope IS NULL OR slope BETWEEN -1 AND 1 ),
+    CHECK ( hdg_from IS NULL OR ( hdg_from BETWEEN 0 AND 360 ) ),
+    CHECK ( hdg_to IS NULL OR ( hdg_to BETWEEN 0 AND 360 ) ),
+    CHECK ( slope IS NULL OR ( slope BETWEEN -1 AND 1 ) ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
     CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
