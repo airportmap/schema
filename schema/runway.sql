@@ -30,7 +30,6 @@ CREATE TABLE runway (
       'cla',  -- Clay
       'com',  -- Composite
       'con',  -- Concrete
-      'cop',  -- Composite
       'cor',  -- Coral (fine crushed coral reef structures)
       'gre',  -- Graded or rolled earth, grass on graded earth
       'grs',  -- Grass or earth not graded or rolled
@@ -58,19 +57,19 @@ CREATE TABLE runway (
     coord_to   POINT SRID 4326 NOT NULL,
 
     -- Threshold elevations in feet MSL
-    alt_from INT UNSIGNED NULL,
-    alt_to   INT UNSIGNED NULL,
+    alt_from SMALLINT UNSIGNED NULL,
+    alt_to   SMALLINT UNSIGNED NULL,
 
     -- Displaced threshold distances in feet (if any)
     dthr_from SMALLINT UNSIGNED NULL,
     dthr_to   SMALLINT UNSIGNED NULL,
 
     -- Runway centerline bearing (degrees true) from each side
-    hdg_from DOUBLE NULL,
-    hdg_to   DOUBLE NULL,
+    hdg_from FLOAT NULL,
+    hdg_to   FLOAT NULL,
 
-    -- Slope gradient (percent) if available
-    slope DOUBLE NULL,
+    -- Slope gradient (if available)
+    slope FLOAT NULL,
 
     -- Runway body polygon
     poly POLYGON SRID 4326 NOT NULL,

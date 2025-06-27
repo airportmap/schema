@@ -46,9 +46,9 @@ CREATE TABLE proc (
     poly MULTILINESTRING SRID 4326 NULL,
 
     -- Optional ILS/LOC data (for approach procedures)
-    ils_freq  INT UNSIGNED NULL,     -- in kHz, e.g. 10990
-    ils_hdg   DOUBLE NULL,           -- LOC heading in degrees
-    ils_slope DOUBLE NULL,           -- glideslope (e.g. 3.0°)
+    ils_freq  MEDIUMINT UNSIGNED NULL,  -- in kHz, e.g. 10990
+    ils_hdg   FLOAT NULL,               -- LOC heading in degrees
+    ils_slope FLOAT NULL,               -- glideslope (e.g. 3.0°)
 
     -- Optional metadata block (altitude constraints, minimas, etc.)
     _meta JSON NULL,

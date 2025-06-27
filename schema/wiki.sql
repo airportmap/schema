@@ -16,7 +16,7 @@ CREATE TABLE wiki (
     airport INT( 10 ) UNSIGNED NOT NULL,
 
     -- Language code
-    lang VARBINARY( 8 ) NOT NULL,
+    lang VARBINARY( 4 ) NOT NULL,
 
     -- The lead paragraph / summary
     content BLOB NOT NULL,

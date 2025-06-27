@@ -28,16 +28,16 @@ CREATE TABLE traffic (
     origin INT( 10 ) UNSIGNED NULL,
 
     -- Last known position (WGS84)
-    coord POINT SRID 4326 NULL,
+    coord POINT SRID 4326 NOT NULL,
 
     -- Altitude in feet (geometric and barometric, if available)
-    alt     INT UNSIGNED NULL,
-    alt_geo INT UNSIGNED NULL,
+    alt     SMALLINT UNSIGNED NULL,
+    alt_geo SMALLINT UNSIGNED NULL,
 
-    -- Heading and speed
-    hdg   DOUBLE NULL,                        -- Heading in degrees (0–360)
-    spd   DOUBLE NULL,                        -- Ground speed in knots
-    vrate DOUBLE NOT NULL DEFAULT 0,          -- Vertical rate (ft/min)
+    -- Heading, speed and vertical rate
+    hdg   FLOAT NULL,                         -- Heading in degrees (0–360)
+    spd   FLOAT NULL,                         -- Ground speed in knots
+    vrate FLOAT NOT NULL DEFAULT 0,           -- Vertical rate (ft/min)
 
     -- Status flags
     _ground  BOOLEAN NOT NULL DEFAULT FALSE,  -- Airplane on ground

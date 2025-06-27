@@ -32,12 +32,12 @@ CREATE TABLE airport (
     _service BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- Airport label in default language and optional multilingual names
-    label VARBINARY( 255 ) NOT NULL,          -- Primary display name
+    label TINYBLOB NOT NULL,                  -- Primary display name
     i18n  JSON NULL,                          -- Translations (e.g. { "en": "...", "fr": "..." })
 
     -- Geographical position (WGS84)
     coord POINT SRID 4326 NOT NULL,           -- Longitude / latitude
-    alt   INT UNSIGNED NOT NULL,              -- Altitute in feet above sea level
+    alt   SMALLINT UNSIGNED NOT NULL,         -- Altitude in feet above sea level
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE airport (
     tz  INT( 10 ) UNSIGNED NOT NULL,          -- Standard timezone
     dtz INT( 10 ) UNSIGNED NULL,              -- Daylight timezone (optional)
 
-    -- Regional classification (continent, country, region/province)
+    -- Regional classification (continent, country and optional region/province)
     continent INT( 10 ) UNSIGNED NOT NULL,
     country   INT( 10 ) UNSIGNED NOT NULL,
     region    INT( 10 ) UNSIGNED NULL,

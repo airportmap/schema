@@ -35,7 +35,7 @@ CREATE TABLE feature (
     coord POINT SRID 4326 NOT NULL,
 
     -- Optional height or elevation (e.g. for obstacles)
-    alt INT UNSIGNED NULL,
+    alt SMALLINT UNSIGNED NULL,
 
     -- Optional name / label (e.g. “GATE A22”) and multilingual titles
     label TINYBLOB NULL,

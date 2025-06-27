@@ -44,8 +44,8 @@ CREATE TABLE airspace (
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Vertical extent (in feet)
-    fl_min INT UNSIGNED NULL,
-    fl_max INT UNSIGNED NULL,
+    fl_min SMALLINT UNSIGNED NULL,
+    fl_max SMALLINT UNSIGNED NULL,
 
     -- Structured meta data
     _meta JSON NULL,

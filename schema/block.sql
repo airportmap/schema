@@ -21,8 +21,8 @@ CREATE TABLE block (
     _target TINYBLOB NOT NULL,
 
     -- ID of the user who initiated the block (admin or moderator),
-    -- or -1 for automated/system-generated blocks
-    actor INT( 10 ) UNSIGNED NOT NULL,
+    -- or NULL for automated/system-generated blocks
+    actor INT( 10 ) UNSIGNED NULL,
 
     -- Optional reason or comment for the block
     reason BLOB NULL,
@@ -38,6 +38,7 @@ CREATE TABLE block (
 
     -- Indexes
     KEY block_target ( _type, _target( 32 ) ),
+    KEY block_actor ( actor ),
     KEY block_expires ( expires ),
 
     -- Foreign key constraints

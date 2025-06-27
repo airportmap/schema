@@ -25,16 +25,16 @@ CREATE TABLE metar (
     -- Weather phenomena (e.g. "RA", "TSRA", "BR")
     wx VARBINARY( 32 ) DEFAULT NULL,
 
-    -- Flight category (VFR, MVFR, IFR, LIFR) or unknown
-    cat ENUM ( 'vfr', 'mvfr', 'ifr', 'lifr', 'unk' ) NOT NULL DEFAULT 'unk',
+    -- Flight category (VFR, MVFR, IFR, LIFR) or NULL for unknown
+    cat ENUM ( 'vfr', 'mvfr', 'ifr', 'lifr' ) DEFAULT NULL,
 
     -- Temperature and dew point (in °C)
-    temp DOUBLE NOT NULL,                     -- Air temperature
-    dewp DOUBLE NOT NULL,                     -- Dew point temperature
+    temp FLOAT NOT NULL,                      -- Air temperature
+    dewp FLOAT NOT NULL,                      -- Dew point temperature
 
     -- Altimeter pressure (in hPa)
-    altim DOUBLE NULL,                        -- Station pressure
-    altim_sea DOUBLE NULL,                    -- Sea-level pressure (optional)
+    altim FLOAT NULL,                         -- Station pressure
+    altim_sea FLOAT NULL,                     -- Sea-level pressure (optional)
 
     -- Wind data
     wind_dir SMALLINT UNSIGNED NULL,          -- Direction in degrees (true)
@@ -42,14 +42,14 @@ CREATE TABLE metar (
     wind_gust SMALLINT UNSIGNED NULL,         -- Gust speed (knots, optional)
 
     -- Precipitation data (if known)
-    precip DOUBLE NOT NULL DEFAULT 0,         -- Rainfall amount (mm)
-    snow DOUBLE NOT NULL DEFAULT 0,           -- Snowfall amount (mm)
+    precip FLOAT NOT NULL DEFAULT 0,          -- Rainfall amount (mm)
+    snow FLOAT NOT NULL DEFAULT 0,            -- Snowfall amount (mm)
 
-    -- Visibility (in statute miles or meters)
-    vis_hori DOUBLE NULL,                     -- Horizontal visibility
+    -- Visibility (in statute miles and feet)
+    vis_hori FLOAT NULL,                      -- Horizontal visibility (in nm)
     vis_vert SMALLINT UNSIGNED NULL,          -- Vertical visibility (ceiling, ft AGL)
 
-    -- Cloud layers
+    -- Cloud layers (e.g. [ { "base": 2500, "cover": "bkn" }, ... ])
     clouds JSON NULL,
 
     -- Timestamp of last update (updated automatically)

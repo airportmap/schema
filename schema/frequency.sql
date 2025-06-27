@@ -55,7 +55,7 @@ CREATE TABLE frequency (
     ) NOT NULL,
 
     -- Frequency in kilohertz (kHz), e.g. 118550 = 118.550 MHz
-    freq INT UNSIGNED NOT NULL,
+    freq MEDIUMINT UNSIGNED NOT NULL,
 
     -- Optional label (e.g. "Tower North", "Approach East")
     label TINYBLOB NULL,

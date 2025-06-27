@@ -67,7 +67,7 @@ CREATE TABLE revision (
     FOREIGN KEY ( reviewer ) REFERENCES user ( _id ),
 
     -- Integrity checks
-    CHECK ( reviewed_at >= edited_at ),
-    CHECK ( edit IS NULL OR JSON_VALID( edit ) )
+    CHECK ( reviewed_at IS NULL OR reviewed_at >= edited_at ),
+    CHECK ( JSON_VALID( edit ) )
 
 );

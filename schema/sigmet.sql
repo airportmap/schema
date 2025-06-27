@@ -30,7 +30,7 @@ CREATE TABLE sigmet (
     -- Main hazard characteristics
     hazard ENUM (
       'cld',    -- Cloud
-      'conv',   -- Connvective
+      'conv',   -- Convective
       'ds',     -- Duststorm
       'fc',     -- Funnel cloud
       'gr',     -- Hail
@@ -43,7 +43,7 @@ CREATE TABLE sigmet (
       'ts',     -- Thunderstorm
       'tsgr',   -- Thunderstorm with hail
       'turb',   -- Turbulence
-      'va',     -- Vulcanic ash
+      'va',     -- Volcanic ash
       'wtspt'   -- Waterspout
     ) NULL,
     qualifier ENUM (
@@ -67,8 +67,8 @@ CREATE TABLE sigmet (
     valid_to   DATETIME NOT NULL,             -- End of SIGMET validity
 
     -- Flight level range affected (in feet)
-    fl_min INT UNSIGNED NULL,
-    fl_max INT UNSIGNED NULL,
+    fl_min SMALLINT UNSIGNED NULL,
+    fl_max SMALLINT UNSIGNED NULL,
 
     -- Motion vector (optional)
     dir ENUM (

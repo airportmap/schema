@@ -19,8 +19,8 @@ CREATE TABLE user (
     email    VARBINARY( 255 ) NOT NULL,
 
     -- Hashed login credentials
-    passwd_hash    TINYBLOB NOT NULL,        -- current password hash (e.g. bcrypt or Argon2)
-    passwd_newhash TINYBLOB NULL,            -- temporary/next-gen hash (for migration or reset)
+    passwd_hash    BINARY( 255 ) NOT NULL,   -- current password hash
+    passwd_newhash BINARY( 255 ) NULL,       -- temporary/next-gen hash (for migration or reset)
 
     -- Email verification or session token (binary-safe)
     token         BINARY( 32 ) NULL,
@@ -53,7 +53,7 @@ CREATE TABLE user (
     last_edit      DATETIME NULL,
 
     -- Two-factor authentication (TOTP support)
-    _2fa_secret  TINYBLOB NULL,
+    _2fa_secret  BINARY( 255 ) NULL,
     _2fa_created DATETIME NULL,
 
     -- Optional user-defined or system-assigned meta data

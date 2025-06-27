@@ -21,29 +21,29 @@ CREATE TABLE navaid (
     label TINYBLOB NULL,
 
     -- Primary frequency / channel (in kHz)
-    freq INT UNSIGNED NOT NULL,
+    freq MEDIUMINT UNSIGNED NOT NULL,
 
     -- Location (WGS84)
     coord POINT SRID 4326 NOT NULL,
-    alt   INT UNSIGNED NULL,
+    alt   SMALLINT UNSIGNED NULL,
 
     -- Country and optional associated airport
     country INT( 10 ) UNSIGNED NOT NULL,
     airport INT( 10 ) UNSIGNED NULL,
 
     -- DME specifics (if not standalone DME)
-    dme_freq    INT UNSIGNED NULL,
+    dme_freq    MEDIUMINT UNSIGNED NULL,
     dme_channel VARBINARY( 32 ) NULL,
     dme_coord   POINT SRID 4326 NULL,
-    dme_alt     INT UNSIGNED NULL,
+    dme_alt     SMALLINT UNSIGNED NULL,
 
     -- Course/bearing offsets
-    magnetic_deg DOUBLE NULL,                  -- magnetic orientation
-    slaved_deg   DOUBLE NULL,                  -- slaved bearing (if applicable)
+    magnetic_deg FLOAT NULL,                   -- magnetic orientation
+    slaved_deg   FLOAT NULL,                   -- slaved bearing (if applicable)
 
     -- Power and range data
-    power_watts INT UNSIGNED NULL,
-    range_nm    DOUBLE NULL,                   -- nominal service range in nautical miles
+    power_watts MEDIUMINT UNSIGNED NULL,
+    range_nm    FLOAT NULL,                    -- nominal service range in nautical miles
 
     -- Optional structured meta data
     _meta JSON NULL,
