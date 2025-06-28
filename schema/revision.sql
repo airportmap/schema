@@ -54,7 +54,8 @@ CREATE TABLE revision (
 
     -- Indexes
     KEY rev_user ( user ),
-    KEY rev_entity ( entity_type, entity_id ),
+    KEY rev_entity ( entity_type ),
+    KEY rev_lookup ( entity_type, entity_id ),
     KEY rev_status ( _status ),
     KEY rev_botedit ( _bot ),
     KEY rev_conflict ( _conflict ),
