@@ -39,8 +39,8 @@ CREATE TABLE proc (
     -- Optional chart URL (external or internal)
     chart BLOB NULL,
 
-    -- List of route segments (list of waypoints, hights etc.)
-    segments JSON NULL,
+    -- List of route legs
+    legs JSON NULL,
 
     -- Optional geographic polyline (visualized route on map)
     poly MULTILINESTRING SRID 4326 NULL,
@@ -70,7 +70,7 @@ CREATE TABLE proc (
 
     -- Integrity checks
     CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
-    CHECK ( segments IS NULL OR JSON_VALID( segments ) ),
+    CHECK ( legs IS NULL OR JSON_VALID( legs ) ),
     CHECK ( poly IS NULL OR ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ) ),
     CHECK ( ils_freq IS NULL OR ( ils_freq BETWEEN 10800 AND 11200 ) ),
     CHECK ( ils_hdg IS NULL OR ( ils_hdg BETWEEN 0 AND 360 ) ),
