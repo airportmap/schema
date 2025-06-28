@@ -57,7 +57,7 @@ CREATE TABLE traffic (
     KEY traffic_origin ( origin ),
     SPATIAL KEY traffic_coord ( coord ),
     KEY traffic_contact ( contact ),
-    KEY traffic_source ( source ),
+    KEY traffic_source ( _source ),
     KEY traffic_sort ( _sort ),
 
     -- Foreign key constraints
