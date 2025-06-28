@@ -25,7 +25,7 @@ CREATE TABLE traffic (
     contact DATETIME NOT NULL,
 
     -- Country of origin
-    origin INT( 10 ) UNSIGNED NULL,
+    origin INT UNSIGNED NULL,
 
     -- Last known position (WGS84)
     coord POINT SRID 4326 NOT NULL,

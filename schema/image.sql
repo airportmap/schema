@@ -10,10 +10,10 @@
 CREATE TABLE image (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Referenced airport ID
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Full-size image URL (e.g. from Wikimedia)
     image_url VARBINARY( 512 ) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE image (
     caption TINYBLOB NULL,
 
     -- User or system reference (nullable)
-    user INT( 10 ) UNSIGNED NULL,
+    user INT UNSIGNED NULL,
 
     -- Last update timestamp
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP

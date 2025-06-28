@@ -10,10 +10,10 @@
 CREATE TABLE wiki (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Referenced airport ID
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Language code
     lang VARBINARY( 4 ) NOT NULL,

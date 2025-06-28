@@ -7,7 +7,7 @@
 CREATE TABLE tz (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Ident code & time zone abbreviation (e.g. "CET", "PST")
     ident VARBINARY( 32 ) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE tz (
     offset SMALLINT NOT NULL,
 
     -- Optional parent (used for standard timezone)
-    parent INT( 10 ) UNSIGNED NULL,
+    parent INT UNSIGNED NULL,
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,

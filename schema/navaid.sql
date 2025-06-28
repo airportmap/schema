@@ -9,7 +9,7 @@
 CREATE TABLE navaid (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Identifier code (e.g. "EDDF", "VORX", "NDB1")
     ident VARBINARY( 8 ) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE navaid (
     alt   SMALLINT UNSIGNED NULL,
 
     -- Country and optional associated airport
-    country INT( 10 ) UNSIGNED NOT NULL,
-    airport INT( 10 ) UNSIGNED NULL,
+    country INT UNSIGNED NOT NULL,
+    airport INT UNSIGNED NULL,
 
     -- DME specifics (if not standalone DME)
     dme_freq    MEDIUMINT UNSIGNED NULL,

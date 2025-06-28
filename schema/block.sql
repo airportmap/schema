@@ -12,7 +12,7 @@
 CREATE TABLE block (
 
     -- Internal ID for each block entry
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Type of the target: 'ip', 'user', 'email', 'ua' (user agent)
     _type ENUM ( 'ip', 'user', 'email', 'ua' ) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE block (
 
     -- ID of the user who initiated the block (admin or moderator),
     -- or NULL for automated/system-generated blocks
-    actor INT( 10 ) UNSIGNED NULL,
+    actor INT UNSIGNED NULL,
 
     -- Optional reason or comment for the block
     reason BLOB NULL,

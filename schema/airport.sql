@@ -12,7 +12,7 @@
 CREATE TABLE airport (
 
     -- Internal database ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Common airport identifier codes
     ICAO VARBINARY( 4 ) NOT NULL,             -- e.g. "KLAX"
@@ -43,13 +43,13 @@ CREATE TABLE airport (
     poly MULTIPOLYGON SRID 4326 NOT NULL,
 
     -- Timezone reference IDs (foreign keys)
-    tz  INT( 10 ) UNSIGNED NOT NULL,          -- Standard timezone
-    dtz INT( 10 ) UNSIGNED NULL,              -- Daylight timezone (optional)
+    tz  INT UNSIGNED NOT NULL,                -- Standard timezone
+    dtz INT UNSIGNED NULL,                    -- Daylight timezone (optional)
 
     -- Regional classification (continent, country and optional region/province)
-    continent INT( 10 ) UNSIGNED NOT NULL,
-    country   INT( 10 ) UNSIGNED NOT NULL,
-    region    INT( 10 ) UNSIGNED NULL,
+    continent INT UNSIGNED NOT NULL,
+    country   INT UNSIGNED NOT NULL,
+    region    INT UNSIGNED NULL,
 
     -- Structured meta data (e.g. municipality, operator, passenger volume etc.)
     _meta JSON NULL,

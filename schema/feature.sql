@@ -8,10 +8,10 @@
 CREATE TABLE feature (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Associated airport ID
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Feature type / classification
     _type ENUM (

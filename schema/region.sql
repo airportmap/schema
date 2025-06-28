@@ -9,7 +9,7 @@
 CREATE TABLE region (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Type of region: 'continent', 'country', 'region'
     _type ENUM ( 'continent', 'country', 'region' ) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE region (
     i18n  JSON NULL,
 
     -- Optional parent (e.g. continent or country)
-    parent INT( 10 ) UNSIGNED NULL,
+    parent INT UNSIGNED NULL,
 
     -- Geographical boundaries (WGS84)
     poly MULTIPOLYGON SRID 4326 NOT NULL,

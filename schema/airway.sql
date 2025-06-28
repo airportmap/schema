@@ -12,7 +12,7 @@
 CREATE TABLE airway (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Airway name/code (e.g. "UL601", "T50", "M851")
     ident VARBINARY( 32 ) NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE airway (
     _dir ENUM ( 'both', 'fwd', 'rev' ) NOT NULL DEFAULT 'both',
 
     -- Start and end waypoint references (foreign keys)
-    wp_from INT( 10 ) UNSIGNED NOT NULL,
-    wp_to   INT( 10 ) UNSIGNED NOT NULL,
+    wp_from INT UNSIGNED NOT NULL,
+    wp_to   INT UNSIGNED NOT NULL,
 
     -- Optional minimum and maximum altitude (in feet)
     fl_min SMALLINT UNSIGNED NULL,

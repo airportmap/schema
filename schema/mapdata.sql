@@ -10,7 +10,7 @@
 CREATE TABLE mapdata (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Layer control
     layer ENUM (
@@ -36,7 +36,7 @@ CREATE TABLE mapdata (
     ) NOT NULL,
 
     -- Referenced ID in source table
-    entity_id INT( 10 ) UNSIGNED NOT NULL,
+    entity_id INT UNSIGNED NOT NULL,
 
     -- Label or name (e.g. waypoint ident or airport ICAO) / optional i18n names
     label TINYBLOB NULL,

@@ -9,13 +9,13 @@
 CREATE TABLE audit (
 
     -- Internal audit log ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Affected user
-    user INT( 10 ) UNSIGNED NOT NULL,
+    user INT UNSIGNED NOT NULL,
 
     -- Acting user (admin, moderator, or NULL for system)
-    actor INT( 10 ) UNSIGNED NULL,
+    actor INT UNSIGNED NULL,
 
     -- Action type
     _type ENUM (

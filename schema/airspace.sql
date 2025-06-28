@@ -10,7 +10,7 @@
 CREATE TABLE airspace (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- ICAO-compliant identifier or label (e.g. "EDGG", "DANGER EDR401", "LOWW TMA 1")
     ident VARBINARY( 32 ) NOT NULL,

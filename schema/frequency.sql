@@ -10,10 +10,10 @@
 CREATE TABLE frequency (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Associated airport (foreign key)
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Function or service type
     _type ENUM (

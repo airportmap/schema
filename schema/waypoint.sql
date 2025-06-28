@@ -9,7 +9,7 @@
 CREATE TABLE waypoint (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Waypoint identifier (usually 3–7 characters)
     ident VARBINARY( 8 ) NOT NULL,

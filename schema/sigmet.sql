@@ -12,7 +12,7 @@
 CREATE TABLE sigmet (
 
     -- Internal unique identifier
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Raw report (original textual source)
     _raw BLOB NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE sigmet (
     fir VARBINARY( 32 ) NULL,
 
     -- Optional related airport
-    airport INT( 10 ) UNSIGNED NULL,
+    airport INT UNSIGNED NULL,
 
     -- Source identification
     label  TINYBLOB NULL,                     -- meteorological office

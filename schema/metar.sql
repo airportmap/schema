@@ -14,7 +14,7 @@ CREATE TABLE metar (
     station VARBINARY( 8 ) NOT NULL PRIMARY KEY,
 
     -- Optional related airport
-    airport INT( 10 ) UNSIGNED NULL,
+    airport INT UNSIGNED NULL,
 
     -- Full raw METAR string
     _raw BLOB NOT NULL,

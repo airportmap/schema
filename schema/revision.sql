@@ -10,13 +10,13 @@
 CREATE TABLE revision (
 
     -- Revision ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- User submitting the edit
-    user INT( 10 ) UNSIGNED NOT NULL,
+    user INT UNSIGNED NOT NULL,
 
     -- User who approved / rejected the edit
-    reviewer INT( 10 ) UNSIGNED NULL,
+    reviewer INT UNSIGNED NULL,
 
     -- Which table was edited (e.g. airport, runway, navaid, proc)
     entity_type ENUM (
@@ -26,7 +26,7 @@ CREATE TABLE revision (
 
     -- Primary key of the affected entity row
     -- NULL if new entity
-    entity_id INT( 10 ) UNSIGNED NULL,
+    entity_id INT UNSIGNED NULL,
 
     -- Workflow status
     _status ENUM (

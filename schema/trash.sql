@@ -8,7 +8,7 @@
 CREATE TABLE trash (
 
     -- Internal trash entry ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Entity table from which the data were deleted
     entity_type ENUM (
@@ -17,10 +17,10 @@ CREATE TABLE trash (
     ) NOT NULL,
 
     -- The original record ID
-    entity_id INT( 10 ) UNSIGNED NULL,
+    entity_id INT UNSIGNED NULL,
 
     -- User who deleted the record (may be NULL for system actions)
-    actor INT( 10 ) UNSIGNED NULL,
+    actor INT UNSIGNED NULL,
 
     -- Deletion timestamp
     ts DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

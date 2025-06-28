@@ -9,10 +9,10 @@
 CREATE TABLE runway (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Referenced airport
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Runway identifiers (e.g. "09L/27R")
     designator_from VARBINARY( 8 ) NOT NULL,  -- lower-numbered end (e.g. "09L")

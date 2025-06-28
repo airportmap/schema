@@ -12,13 +12,13 @@
 CREATE TABLE proc (
 
     -- Internal ID
-    _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Referenced airport ID
-    airport INT( 10 ) UNSIGNED NOT NULL,
+    airport INT UNSIGNED NOT NULL,
 
     -- Optional runway reference (may be NULL for general procedures)
-    runway INT( 10 ) UNSIGNED NULL,
+    runway INT UNSIGNED NULL,
 
     -- Procedure type
     _type ENUM ( 'sid', 'star', 'iap' ) NOT NULL,
