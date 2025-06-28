@@ -60,19 +60,19 @@ CREATE TABLE navaid (
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
-    CHECK (
-      ST_SRID( coord ) = 4326 AND
-      ST_Y( coord ) BETWEEN  -90 AND  90 AND
-      ST_X( coord ) BETWEEN -180 AND 180
-    ),
-    CHECK ( dme_coord IS NULL OR (
-      ST_SRID( dme_coord ) = 4326 AND
-      ST_Y( dme_coord ) BETWEEN  -90 AND  90 AND
-      ST_X( dme_coord ) BETWEEN -180 AND 180
+    CHECK ( ( magnetic_deg BETWEEN 0 AND 360 ) OR magnetic_deg IS NULL ),
+    CHECK ( ( slaved_deg BETWEEN 0 AND 360 ) OR slaved_deg IS NULL ),
+    CHECK ( range_nm >= 0 OR range_nm IS NULL ),
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL ),
+    CHECK ( ST_SRID( coord ) = 4326 AND (
+      ST_X( coord ) BETWEEN -180 AND 180 AND
+      ST_Y( coord ) BETWEEN  -90 AND  90
     ) ),
-    CHECK ( magnetic_deg IS NULL OR ( magnetic_deg BETWEEN 0 AND 360 ) ),
-    CHECK ( slaved_deg IS NULL OR ( slaved_deg BETWEEN 0 AND 360 ) ),
-    CHECK ( range_nm IS NULL OR range_nm >= 0 ),
-    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
+    CHECK ( dme_coord IS NULL OR (
+      ST_SRID( dme_coord ) = 4326 AND (
+        ST_X( dme_coord ) BETWEEN -180 AND 180 AND
+        ST_Y( dme_coord ) BETWEEN  -90 AND  90
+      )
+    ) )
 
 );

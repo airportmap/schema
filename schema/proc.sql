@@ -69,12 +69,12 @@ CREATE TABLE proc (
     FOREIGN KEY ( runway ) REFERENCES runway ( _id ),
 
     -- Integrity checks
-    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
-    CHECK ( legs IS NULL OR JSON_VALID( legs ) ),
-    CHECK ( poly IS NULL OR ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ) ),
-    CHECK ( ils_freq IS NULL OR ( ils_freq BETWEEN 10800 AND 11200 ) ),
-    CHECK ( ils_hdg IS NULL OR ( ils_hdg BETWEEN 0 AND 360 ) ),
-    CHECK ( ils_slope IS NULL OR ( ils_slope BETWEEN 2.0 AND 4.0 ) ),
+    CHECK ( JSON_VALID( i18n ) OR i18n IS NULL ),
+    CHECK ( JSON_VALID( legs ) OR legs IS NULL ),
+    CHECK ( ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ) OR poly IS NULL ),
+    CHECK ( ( ils_freq BETWEEN 10800 AND 11200 ) OR ils_freq IS NULL ),
+    CHECK ( ( ils_hdg BETWEEN 0 AND 360 ) OR ils_hdg IS NULL ),
+    CHECK ( ( ils_slope BETWEEN 2.0 AND 4.0 ) OR ils_slope IS NULL ),
     CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

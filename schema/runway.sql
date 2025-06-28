@@ -87,20 +87,20 @@ CREATE TABLE runway (
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
+    CHECK ( ( hdg_from BETWEEN 0 AND 360 ) OR hdg_from IS NULL ),
+    CHECK ( ( hdg_to BETWEEN 0 AND 360 ) OR hdg_to IS NULL ),
+    CHECK ( ( slope BETWEEN -1 AND 1 ) OR slope IS NULL ),
+    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL ),
     CHECK (
       ST_SRID( coord_from ) = 4326 AND
-      ST_Y( coord_from ) BETWEEN  -90 AND  90 AND
-      ST_X( coord_from ) BETWEEN -180 AND 180
+      ST_X( coord_from ) BETWEEN -180 AND 180 AND
+      ST_Y( coord_from ) BETWEEN  -90 AND  90
     ),
     CHECK (
       ST_SRID( coord_to ) = 4326 AND
-      ST_Y( coord_to ) BETWEEN  -90 AND  90 AND
-      ST_X( coord_to ) BETWEEN -180 AND 180
-    ),
-    CHECK ( hdg_from IS NULL OR ( hdg_from BETWEEN 0 AND 360 ) ),
-    CHECK ( hdg_to IS NULL OR ( hdg_to BETWEEN 0 AND 360 ) ),
-    CHECK ( slope IS NULL OR ( slope BETWEEN -1 AND 1 ) ),
-    CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
-    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
+      ST_X( coord_to ) BETWEEN -180 AND 180 AND
+      ST_Y( coord_to ) BETWEEN  -90 AND  90
+    )
 
 );

@@ -64,10 +64,10 @@ CREATE TABLE metar (
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
-    CHECK ( altim IS NULL OR altim >= 0 ),
-    CHECK ( altim_sea IS NULL OR altim_sea >= 0 ),
-    CHECK ( wind_dir IS NULL OR ( wind_dir BETWEEN 0 AND 360 ) ),
-    CHECK ( vis_hori IS NULL OR vis_hori >= 0 ),
-    CHECK ( clouds IS NULL OR JSON_VALID( clouds ) )
+    CHECK ( altim >= 0 OR altim IS NULL ),
+    CHECK ( altim_sea >= 0 OR altim_sea IS NULL ),
+    CHECK ( ( wind_dir BETWEEN 0 AND 360 ) OR wind_dir IS NULL ),
+    CHECK ( vis_hori >= 0 OR vis_hori IS NULL ),
+    CHECK ( JSON_VALID( clouds ) OR clouds IS NULL )
 
 );

@@ -63,8 +63,8 @@ CREATE TABLE feature (
     CHECK ( JSON_VALID( _meta ) OR _meta IS NULL ),
     CHECK ( ST_SRID( geom ) = 4326 OR geom IS NULL ),
     CHECK ( ST_SRID( coord ) = 4326 AND (
-      ST_Y( coord ) BETWEEN -90 AND 90 AND
-      ST_X( coord ) BETWEEN -180 AND 180
+      ST_X( coord ) BETWEEN -180 AND 180 AND
+      ST_Y( coord ) BETWEEN  -90 AND  90
     ) )
 
 );

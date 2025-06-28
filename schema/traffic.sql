@@ -67,8 +67,8 @@ CREATE TABLE traffic (
     CHECK ( ( hdg BETWEEN 0 AND 360 ) OR hdg IS NULL ),
     CHECK ( spd >= 0 OR spd IS NULL ),
     CHECK ( ST_SRID( coord ) = 4326 AND (
-      ST_Y( coord ) BETWEEN  -90 AND  90 AND
-      ST_X( coord ) BETWEEN -180 AND 180
+      ST_X( coord ) BETWEEN -180 AND 180 AND
+      ST_Y( coord ) BETWEEN  -90 AND  90
     ) )
 
 );
