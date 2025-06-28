@@ -53,7 +53,7 @@ CREATE TABLE image (
     FOREIGN KEY ( user ) REFERENCES user ( _id ),
 
     -- Integrity checks
-    CHECK ( image_meta IS NULL OR JSON_VALID( image_meta ) ),
-    CHECK ( thumb_meta IS NULL OR JSON_VALID( thumb_meta ) )
+    CHECK ( JSON_VALID( image_meta ) OR image_meta IS NULL ),
+    CHECK ( JSON_VALID( thumb_meta ) OR thumb_meta IS NULL )
 
 );

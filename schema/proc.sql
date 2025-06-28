@@ -75,6 +75,6 @@ CREATE TABLE proc (
     CHECK ( ils_freq IS NULL OR ( ils_freq BETWEEN 10800 AND 11200 ) ),
     CHECK ( ils_hdg IS NULL OR ( ils_hdg BETWEEN 0 AND 360 ) ),
     CHECK ( ils_slope IS NULL OR ( ils_slope BETWEEN 2.0 AND 4.0 ) ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

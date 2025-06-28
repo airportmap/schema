@@ -59,13 +59,12 @@ CREATE TABLE feature (
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
-    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
-    CHECK (
-      ST_SRID( coord ) = 4326 AND
+    CHECK ( JSON_VALID( i18n ) OR i18n IS NULL ),
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL ),
+    CHECK ( ST_SRID( geom ) = 4326 OR geom IS NULL ),
+    CHECK ( ST_SRID( coord ) = 4326 AND (
       ST_Y( coord ) BETWEEN -90 AND 90 AND
       ST_X( coord ) BETWEEN -180 AND 180
-    ),
-    CHECK ( geom IS NULL OR ST_SRID( geom ) = 4326 ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    ) )
 
 );

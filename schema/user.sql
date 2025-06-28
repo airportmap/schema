@@ -77,6 +77,6 @@ CREATE TABLE user (
     KEY account_status ( _status ),
 
     -- Integrity checks
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

@@ -67,8 +67,8 @@ CREATE TABLE mapdata (
     SPATIAL KEY map_geom ( geom ),
 
     -- Integrity checks
-    CHECK ( _zmax IS NULL OR _zmax >= _zmin ),
+    CHECK ( _zmax >= _zmin OR _zmax IS NULL ),
     CHECK ( ST_SRID( geom ) = 4326 ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

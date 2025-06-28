@@ -45,6 +45,6 @@ CREATE TABLE trash (
 
     -- Integrity checks
     CHECK ( JSON_VALID( content ) ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

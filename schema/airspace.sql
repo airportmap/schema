@@ -57,8 +57,8 @@ CREATE TABLE airspace (
     SPATIAL KEY airspace_poly ( poly ),
 
     -- Integrity checks
-    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( i18n ) OR i18n IS NULL ),
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

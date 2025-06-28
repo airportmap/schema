@@ -101,6 +101,6 @@ CREATE TABLE runway (
     CHECK ( hdg_to IS NULL OR ( hdg_to BETWEEN 0 AND 360 ) ),
     CHECK ( slope IS NULL OR ( slope BETWEEN -1 AND 1 ) ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

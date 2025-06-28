@@ -45,6 +45,6 @@ CREATE TABLE block (
     FOREIGN KEY ( actor ) REFERENCES user ( _id ),
 
     -- Integrity checks
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

@@ -73,6 +73,6 @@ CREATE TABLE navaid (
     CHECK ( magnetic_deg IS NULL OR ( magnetic_deg BETWEEN 0 AND 360 ) ),
     CHECK ( slaved_deg IS NULL OR ( slaved_deg BETWEEN 0 AND 360 ) ),
     CHECK ( range_nm IS NULL OR range_nm >= 0 ),
-    CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
+    CHECK ( JSON_VALID( _meta ) OR _meta IS NULL )
 
 );

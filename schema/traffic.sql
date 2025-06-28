@@ -64,12 +64,11 @@ CREATE TABLE traffic (
     FOREIGN KEY ( origin ) REFERENCES region ( _id ),
 
     -- Integrity checks
-    CHECK (
-      ST_SRID( coord ) = 4326 AND
+    CHECK ( ( hdg BETWEEN 0 AND 360 ) OR hdg IS NULL ),
+    CHECK ( spd >= 0 OR spd IS NULL ),
+    CHECK ( ST_SRID( coord ) = 4326 AND (
       ST_Y( coord ) BETWEEN  -90 AND  90 AND
       ST_X( coord ) BETWEEN -180 AND 180
-    ),
-    CHECK ( hdg IS NULL OR ( hdg BETWEEN 0 AND 360 ) ),
-    CHECK ( spd IS NULL OR spd >= 0 )
+    ) )
 
 );
