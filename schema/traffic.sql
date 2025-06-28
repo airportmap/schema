@@ -61,7 +61,7 @@ CREATE TABLE traffic (
     KEY traffic_sort ( _sort ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( origin ) REFERENCES region ( _id )
+    FOREIGN KEY ( origin ) REFERENCES region ( _id ),
 
     -- Integrity checks
     CHECK (

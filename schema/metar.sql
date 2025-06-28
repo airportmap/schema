@@ -61,7 +61,7 @@ CREATE TABLE metar (
     KEY metar_cat ( cat ),
 
     -- Foreign key constraints
-    FOREIGN KEY ( airport ) REFERENCES airport ( _id )
+    FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
 
     -- Integrity checks
     CHECK ( altim IS NULL OR altim >= 0 ),
