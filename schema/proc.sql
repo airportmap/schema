@@ -63,7 +63,6 @@ CREATE TABLE proc (
     KEY proc_type ( _type ),
     KEY proc_category ( _category ),
     KEY proc_ident ( ident ),
-    FULLTEXT KEY proc_search ( label, i18n ),
 
     -- Foreign key constraints
     FOREIGN KEY ( airport ) REFERENCES airport ( _id ),
