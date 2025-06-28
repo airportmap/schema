@@ -20,7 +20,7 @@ CREATE TABLE tz (
     i18n  JSON NULL,
 
     -- UTC offset in minutes (e.g. 60 for +01:00, -480 for -08:00)
-    offset SMALLINT NOT NULL,
+    _offset SMALLINT NOT NULL,
 
     -- Optional parent (used for standard timezone)
     parent INT UNSIGNED NULL,
@@ -31,7 +31,7 @@ CREATE TABLE tz (
     -- Indexes
     UNIQUE KEY region_ident ( ident ),
     KEY tz_short ( short ),
-    KEY tz_offset ( offset ),
+    KEY tz_offset ( _offset ),
     SPATIAL KEY region_poly ( poly ),
 
     -- Foreign key to parent timezone (if any)
