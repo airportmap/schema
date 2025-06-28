@@ -7,6 +7,10 @@
 --
 -- Userlabels and emails are stored as binary values to enforce strict
 -- case-sensitivity and prevent normalization issues.
+--
+-- This table keeps track of users edit counts and reputation
+-- (karma) based on their contributions, which is used for moderation
+-- and trust assessment.
 -- ========================================================================
 
 CREATE TABLE user (
@@ -51,6 +55,12 @@ CREATE TABLE user (
     rejected_edits INT UNSIGNED NOT NULL DEFAULT 0,
     edit_size      INT UNSIGNED NOT NULL DEFAULT 0,
     last_edit      DATETIME NULL,
+
+    -- The users reputation (karma) based on edits:
+    -- 0.5 is the default neutral value
+    -- 0.0 is the lowest possible value (bad reputation)
+    -- 1.0 is the highest possible value (good reputation)
+    karma FLOAT NOT NULL DEFAULT 0.5,
 
     -- Two-factor authentication (TOTP support)
     _2fa_secret  BINARY( 255 ) NULL,
