@@ -19,8 +19,9 @@ CREATE TABLE user (
     _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Unique, case-sensitive username and email (stored in binary)
-    username VARBINARY( 32 ) NOT NULL,
-    email    VARBINARY( 255 ) NOT NULL,
+    username  VARBINARY( 32 ) NOT NULL,
+    email     VARBINARY( 255 ) NOT NULL,
+    email_new VARBINARY( 255 ) NULL,
 
     -- Hashed login credentials
     passwd_hash    BINARY( 255 ) NOT NULL,   -- current password hash
@@ -36,12 +37,12 @@ CREATE TABLE user (
     -- Account lifecycle status
     _status ENUM ( 'pending', 'active', 'blocked', 'closed' ) NOT NULL DEFAULT 'pending',
 
-    -- Internal verification (e.g. for trusted editors or staff)
-    _verified DATETIME NULL,
-
     -- Timestamps for registration and activation
     registered DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     activated  DATETIME NULL,
+
+    -- Internal verification (e.g. for trusted editors or staff)
+    verified DATETIME NULL,
 
     -- Login history and failed attempt tracking
     last_login      DATETIME NULL,
