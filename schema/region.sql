@@ -1,9 +1,10 @@
 -- ========================================================================
 -- TABLE region
 -- ------------------------------------------------------------------------
--- Stores global geographic units including continents, countries,
--- and administrative subregions. Hierarchical with ISO codes and
--- optional multilingual labels.
+-- Stores global geographic units including countries and administrative
+-- subregions.
+--
+-- Hierarchical with ISO codes and optional multilingual labels.
 -- ========================================================================
 
 CREATE TABLE region (
@@ -11,8 +12,8 @@ CREATE TABLE region (
     -- Internal ID
     _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-    -- Type of region: 'continent', 'country', 'region'
-    _type ENUM ( 'continent', 'country', 'region' ) NOT NULL,
+    -- Type of region: 'country', 'region'
+    _type ENUM ( 'country', 'region' ) NOT NULL,
 
     -- Common ISO code (e.g. "US", "EU", "DE", "US-NY")
     ident VARBINARY( 8 ) NOT NULL,
@@ -21,7 +22,7 @@ CREATE TABLE region (
     label TINYBLOB NOT NULL,
     i18n  JSON NULL,
 
-    -- Optional parent (e.g. continent or country)
+    -- Optional parent (region -> country)
     parent INT UNSIGNED NULL,
 
     -- Geographical boundaries (WGS84)
@@ -36,7 +37,7 @@ CREATE TABLE region (
     FOREIGN KEY ( parent ) REFERENCES region ( _id ),
 
     -- Integrity checks
-    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
+    CHECK ( JSON_VALID( i18n ) OR i18n IS NULL ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );

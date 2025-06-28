@@ -2,6 +2,8 @@
 -- TABLE tz
 -- ------------------------------------------------------------------------
 -- Stores supported timezones with their common label and UTC offset.
+--
+-- References child to parent timezones (e.g. daylight to standard).
 -- ========================================================================
 
 CREATE TABLE tz (
@@ -11,7 +13,7 @@ CREATE TABLE tz (
 
     -- Ident code & time zone abbreviation (e.g. "CET", "PST")
     ident VARBINARY( 32 ) NOT NULL,
-    code  VARBINARY( 8 ) NOT NULL,
+    short VARBINARY(  8 ) NOT NULL,
 
     -- Canonical timezone label and optional multilingual names
     label TINYBLOB NOT NULL,
@@ -28,7 +30,7 @@ CREATE TABLE tz (
 
     -- Indexes
     UNIQUE KEY region_ident ( ident ),
-    KEY tz_code ( code ),
+    KEY tz_short ( short ),
     KEY tz_offset ( offset ),
     SPATIAL KEY region_poly ( poly ),
 
@@ -36,7 +38,7 @@ CREATE TABLE tz (
     FOREIGN KEY ( parent ) REFERENCES tz ( _id ),
 
     -- Integrity checks
-    CHECK ( i18n IS NULL OR JSON_VALID( i18n ) ),
+    CHECK ( JSON_VALID( i18n ) OR i18n IS NULL ),
     CHECK ( ST_SRID( poly ) = 4326 AND ST_IsValid( poly ) )
 
 );
