@@ -30,7 +30,8 @@ CREATE TABLE audit (
       'login_failed',   -- Too many failed login attempts / lockout
       'email_change',   -- Email address modified
       '2fa_enable',     -- Two-factor authentication enabled
-      '2fa_disable'     -- Two-factor authentication disabled
+      '2fa_disable',    -- Two-factor authentication disabled
+      'data_export'     -- User data export (GDPR)
     ) NOT NULL,
 
     -- Timestamp of the action
