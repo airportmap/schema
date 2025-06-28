@@ -1,5 +1,5 @@
 -- ========================================================================
--- TABLE frequency
+-- TABLE freq
 -- ------------------------------------------------------------------------
 -- Stores operational radio frequencies for airports, including
 -- tower, ground, ATIS, approach, and other services.
@@ -7,7 +7,7 @@
 -- All values are stored in kilohertz (kHz).
 -- ========================================================================
 
-CREATE TABLE frequency (
+CREATE TABLE freq (
 
     -- Internal ID
     _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,

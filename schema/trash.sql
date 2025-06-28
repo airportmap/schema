@@ -12,7 +12,7 @@ CREATE TABLE trash (
 
     -- Entity table from which the data were deleted
     entity_type ENUM (
-      'airport', 'airspace', 'airway', 'feature', 'frequency', 'image',
+      'airport', 'airspace', 'airway', 'feature', 'freq', 'image',
       'navaid', 'proc', 'region', 'runway', 'tz', 'waypoint'
     ) NOT NULL,
 
