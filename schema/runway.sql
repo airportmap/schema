@@ -81,7 +81,6 @@ CREATE TABLE runway (
     UNIQUE KEY runway_ident ( airport, designator_from, designator_to ),
     KEY runway_airport ( airport ),
     KEY runway_surface ( surface ),
-    SPATIAL KEY runway_coord ( coord_from, coord_to ),
     SPATIAL KEY runway_poly ( poly ),
 
     -- Foreign key constraints
