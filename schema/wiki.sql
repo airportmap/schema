@@ -18,8 +18,8 @@ CREATE TABLE wiki (
     -- Language code
     lang VARBINARY( 4 ) NOT NULL,
 
-    -- The lead paragraph / summary
-    content BLOB NOT NULL,
+    -- The lead paragraph / summary (UTF-8 encoded)
+    content TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
 
     -- Last update timestamp
     _touched DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
