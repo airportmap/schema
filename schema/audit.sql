@@ -43,6 +43,7 @@ CREATE TABLE audit (
     KEY audit_user ( user ),
     KEY audit_actor ( actor ),
     KEY audit_type ( _type ),
+    KEY audit_ts ( ts ),
 
     -- Foreign key constraints
     FOREIGN KEY ( user ) REFERENCES user ( _id ),
