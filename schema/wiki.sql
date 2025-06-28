@@ -27,6 +27,7 @@ CREATE TABLE wiki (
 
     -- Indexes
     UNIQUE KEY wiki_lang ( airport, lang ),
+    FULLTEXT KEY wiki_search ( content ),
 
     -- Foreign key constraints
     FOREIGN KEY ( airport ) REFERENCES airport ( _id )

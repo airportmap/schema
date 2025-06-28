@@ -29,6 +29,7 @@ CREATE TABLE tz (
     -- Indexes
     UNIQUE KEY region_ident ( ident ),
     KEY tz_code ( code ),
+    FULLTEXT KEY tz_search ( label, i18n ),
     KEY tz_offset ( offset ),
     SPATIAL KEY region_poly ( poly ),
 

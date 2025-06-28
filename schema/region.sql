@@ -29,6 +29,7 @@ CREATE TABLE region (
 
     -- Indexes
     UNIQUE KEY region_ident ( ident ),
+    FULLTEXT KEY region_search ( label, i18n ),
     SPATIAL KEY region_poly ( poly ),
     KEY region_parent ( parent ),
 

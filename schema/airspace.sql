@@ -52,6 +52,7 @@ CREATE TABLE airspace (
 
     -- Indexes
     KEY airspace_ident ( ident ),
+    FULLTEXT KEY airspace_search ( label, i18n ),
     KEY airspace_type ( _type ),
     KEY airspace_class ( _class ),
     SPATIAL KEY airspace_poly ( poly ),

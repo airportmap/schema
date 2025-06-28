@@ -65,6 +65,7 @@ CREATE TABLE airport (
     KEY airport_type ( _type ),
     KEY airport_status ( _closed ),
     KEY airport_service ( _service ),
+    FULLTEXT KEY airport_search ( label, i18n ),
     SPATIAL KEY airport_coord ( coord ),
     SPATIAL KEY airport_poly ( poly ),
     KEY airport_tz ( tz ),
