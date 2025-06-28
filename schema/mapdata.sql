@@ -26,7 +26,7 @@ CREATE TABLE mapdata (
       'nav.spi',    -- Special airways
       'sp.ctrl',    -- Controls airspaces
       'sp.rest',    -- Restricted airspaces
-      'sp.spi',     -- Special airspaces
+      'sp.spi'      -- Special airspaces
     ) NOT NULL,
 
     -- Entity type / source table
