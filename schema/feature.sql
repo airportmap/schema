@@ -42,7 +42,7 @@ CREATE TABLE feature (
     i18n  JSON NULL,
 
     -- Optional geometry (e.g. stand area, obstacle volume)
-    shape GEOMETRY NULL,
+    geom GEOMETRY SRID 4326 NULL,
 
     -- Optional meta data or configuration values
     _meta JSON NULL,
@@ -65,6 +65,7 @@ CREATE TABLE feature (
       ST_Y( coord ) BETWEEN -90 AND 90 AND
       ST_X( coord ) BETWEEN -180 AND 180
     ),
+    CHECK ( geom IS NULL OR ST_SRID( geom ) = 4326 ),
     CHECK ( _meta IS NULL OR JSON_VALID( _meta ) )
 
 );

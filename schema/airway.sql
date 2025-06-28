@@ -2,7 +2,7 @@
 -- TABLE airway
 -- ------------------------------------------------------------------------
 -- Stores global airways as a set of directional segments between
--- waypoints. Supports classification (e.g. upper/lower, RNAV, conditional),
+-- waypoints. Supports classification (e.g. high/low, RNAV, conditional),
 -- directionality, altitude constraints, route codes, and FIR/region
 -- attribution.
 --
@@ -18,7 +18,7 @@ CREATE TABLE airway (
     ident VARBINARY( 32 ) NOT NULL,
 
     -- Optional classification
-    _class ENUM ( 'lower', 'upper', 'rnav', 'special' ) NOT NULL DEFAULT 'upper',
+    _class ENUM ( 'low', 'high', 'rnav', 'special' ) NOT NULL DEFAULT 'high',
 
     -- Directionality (uni- or bidirectional)
     _dir ENUM ( 'both', 'fwd', 'rev' ) NOT NULL DEFAULT 'both',
