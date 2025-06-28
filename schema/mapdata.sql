@@ -13,7 +13,21 @@ CREATE TABLE mapdata (
     _id INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Layer control
-    layer ENUM () NOT NULL,
+    layer ENUM (
+      'ap.civ',     -- Civil airports
+      'ap.mil',     -- Military / joint-use airports
+      'ap.spi',     -- Special airports
+      'ap.rw',      -- Runways
+      'ap.obj',     -- Airport objects
+      'nav.aid',    -- Navaids (DME, VOR, NDB ...)
+      'nav.wp',     -- Waypoints
+      'nav.high',   -- Airways (high)
+      'nav.low',    -- Airways (low)
+      'nav.spi',    -- Special airways
+      'sp.ctrl',    -- Controls airspaces
+      'sp.rest',    -- Restricted airspaces
+      'sp.spi',     -- Special airspaces
+    ) NOT NULL,
 
     -- Entity type / source table
     entity_type ENUM (
@@ -36,7 +50,7 @@ CREATE TABLE mapdata (
     _sort DOUBLE NOT NULL DEFAULT 0.5,
 
     -- Geometrical shape (POINT, LINESTRING, POLYGON, etc.)
-    geom GEOMETRY NOT NULL SRID 4326,
+    geom GEOMETRY SRID 4326 NOT NULL,
 
     -- Structured meta data
     _meta JSON NULL,
