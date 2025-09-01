@@ -10,7 +10,7 @@
 
 CREATE TABLE airport (
 
-    -- Internal database ID
+    -- Internal ID
     _id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- Common airport identifier codes
