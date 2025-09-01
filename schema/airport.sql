@@ -72,8 +72,8 @@ CREATE TABLE airport (
     SPATIAL KEY airport_coord ( coord ),
 
     -- Foreign keys
-    FOREIGN KEY ( tz )      REFERENCES tz ( _id ),
-    FOREIGN KEY ( dtz )     REFERENCES tz ( _id ),
+    FOREIGN KEY ( tz )      REFERENCES timezone ( _id ),
+    FOREIGN KEY ( dtz )     REFERENCES timezone ( _id ),
     FOREIGN KEY ( country ) REFERENCES region ( _id ),
     FOREIGN KEY ( region )  REFERENCES region ( _id ),
 

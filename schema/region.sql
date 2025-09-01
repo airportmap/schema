@@ -31,7 +31,7 @@ CREATE TABLE region (
 
     KEY region_parent ( parent ),
 
-    -- Foreign key to parent region
+    -- Foreign keys
     FOREIGN KEY ( parent ) REFERENCES region ( _id ),
 
     -- Constraints
